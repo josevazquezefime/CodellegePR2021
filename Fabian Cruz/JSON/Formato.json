@@ -1,0 +1,22 @@
+// JSON = Javascript Object Notation
+// JSON es facil de leer pero mas pesado de abrir
+
+(
+    'Curso': {
+        'Generación': 'Primavera 2021',
+        "Horario" : "9:00 AM a 12 PM",
+        "Dias" : "Lunes a Viernes",
+        "Alumnos" : [
+            {"nombre" : "Mariel"}, 
+            {"Nombre" : "Analucía"}, 
+            {"nombre" : "Jose"]
+    }
+)
+
+// XML
+// Es dificil de leer pero mas rapido de abrir
+<Alumnos>
+    <alumno nombre="Mariel"></alumno>
+    <alumno nombre="Mariel"></alumno>
+    <alumno nombre="Mariel"></alumno>
+</alumnos>
