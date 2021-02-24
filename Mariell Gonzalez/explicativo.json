@@ -1,0 +1,7 @@
+{
+    "curso" {
+        "Generiacion": "Primavera 2021",
+        "Horario": "9:00 AM a 12 PM",
+        "Días": "Lunes a Viernes",
+        "Alumnos":[{"nombre" : "Mariell"}, {"nombre" : "Analucia"}]
+}
