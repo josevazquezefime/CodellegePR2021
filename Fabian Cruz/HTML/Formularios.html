@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formularios</title>
+</head>
+
+<body>
+    <form action="" method="GET">
+        <!-- action dice de donde o a donde se tiene que enviar la informacion ya no se utiliza en los navegadores acctuales -->
+        <!-- method dice que clase de funcion quieres hacer -->
+        <!-- GET muestra los datos en la URL -->
+        <!-- poust dice que clase de informacion quieres enviar -->
+        Nombre: <input type="text" placeholder="Texto gris" name="A">
+        <br>
+        <textarea cols="5" rows="3" name="B">12345</textarea>
+        <br>
+        Contraseña: <input type="password" name="C">
+        <br>
+        <input type="button" value="Algo" name="D">
+        <br>
+        <button>Click me</button>
+        <br>
+        <input type="checkbox" checked name="E">
+        <br>
+        <input type="color" value="#FADDC2" name="F">
+        <br>
+        <input type="date" value="2021-02-18" name="G">
+        <br>
+        <input type="file" name="H">
+        <br>
+        <input type="number" value="13" min="-10" max="10" name="I">
+        <br>
+        <input type="radio" name="J">
+        <input type="radio" name="K">
+        <br>
+        <!-- input reset solo funciona si esta dentro de un form -->
+        <input type="reset" value="Borrar">
+        <input type="submit" value="Send">
+        <br>
+        <select name="sexo" id="">
+            <option value="H">Hombre</option>
+            <option value="F">Mujer</option>
+        </select>
+    </form>
+</body>
+
+</html>
