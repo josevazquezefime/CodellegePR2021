@@ -1,0 +1,80 @@
+body,
+html {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: url(https://images.photowall.com/products/58201/marble-crema-marfil.jpg?h=699&q=85);
+    background-size: 100% 100%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+main {
+    text-align: center;
+
+}
+
+.tarjeta {
+    width: 25rem;
+    height: 15rem;
+    background: rgb(39, 41, 45);
+    margin-bottom: 2rem;
+    display: inline-block;
+    box-shadow: 2px 1px 30px 3px;
+    position: relative;
+}
+
+.tarjeta > section {    
+    position: absolute;
+    left: 2rem;
+    bottom: 2rem;
+}
+.tarjeta section{
+    display: inline-block;
+    font-size: 0.65em;
+}
+
+.tarjeta section h2,
+.tarjeta section h6 {
+    display: inline-block;
+    text-align: left;
+    margin: 0;
+    margin-bottom: 0.3rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.golden-text {
+    color: goldenrod;
+    font-weight: bold;
+}
+
+
+.white-text {
+    color: white;
+}
+
+.gray-text {
+    color: gray;
+}
+.table{
+    display: table;
+}
+.table-row{
+    display: table-row;
+}
+.table-cell{
+    display: table-cell;
+    vertical-align: middle;
+}
+.mitad{
+    width: 50%;
+    float: left;
+}
+.mitad:first-child{
+    text-align: ;
+    
+    
+}
