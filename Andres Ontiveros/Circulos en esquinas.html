@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body,
+        html {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .cuadro {
+          margin-top: 20vh;
+            width: 60vh;
+            height: 60vh;
+            background-color: gray;
+            display: inline-block;
+            position: relative;
+        }
+        .circulo {
+            width: 4rem;
+            height: 4rem;
+            border-radius: 100%;
+            position: absolute;
+        }
+        .azul {
+            top: 2rem;
+            left: 2rem;
+            background-color: blue;
+        }
+        .rojo {
+            top: 2rem;
+            right: 2rem;
+            background-color: red;
+        }
+        .verde {
+            bottom: 2rem;
+            left: 2rem;
+            background-color: green;
+        }
+        .amarillo {
+            bottom: 2em;
+            right: 2rem;
+            background-color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cuadro gris">
+        <div class="circulo azul"></div>
+        <div class="circulo verde"></div>
+        <div class="circulo rojo"></div>
+        <div class="circulo amarillo"></div>   
+    </div>
+    <div class="circulo azul"></div>
+    <div class="circulo verde"></div>
+    <div class="circulo rojo"></div>
+    <div class="circulo amarillo"></div>
+</body>
+
+</html>
