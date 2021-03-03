@@ -1,0 +1,25 @@
+body {
+    background: black;
+    color: white;
+}
+header h1 {
+    text-align: center;
+    font-weight: bold;
+}
+.imagen {
+    height: 40vh;
+    width: 20vw;
+}
+.titulo-peli {
+    font-weight: bold;
+}
+.sinopsis {
+    color: gray;
+}
+.piepagina {
+    font-style: italic;
+}
+.derecha {
+    display: inline-block;
+    text-align: right;
+}

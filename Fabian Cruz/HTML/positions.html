@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posicionamiento</title>
+    <style>
+        .cuadro {
+            position: absolute;
+            width: 15rem;
+            height: 15rem;
+            border: solid;
+        }
+
+        .gran1 {
+            background: purple;
+        }
+
+        .cuadroP {
+            width: 10%;
+            height: 10%;
+            background: gray;
+        }
+
+        .peq1 {
+            left: 1rem;
+            top: 1rem;
+        }
+
+        .relative {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Posicionamiento</h1>
+    <div class="cuadro gran1">
+        <div class="relative"></div>
+            <div class="cuadroP peq1"></div>
+        </div>
+    </div>
+</body>
+</html>
