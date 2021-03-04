@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @keyframes mover {
+            0% {
+                top: 0rem;
+                left: 0rem;
+            }
+            25% {
+                top: 7rem;
+                left: 7rem;
+            }
+            75% {
+                top: 3
+            }
+        }
+        .tarjeta {
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: inline-block;
+            width: 20rem;
+            height: 20rem;
+            background: forestgreen;
+            transition: width .3s, height .5s, background .4s, top .5s, left .7s;
+        }
+        .tarjeta:hover {
+            width: 50rem;
+            height: 30rem;
+
+            background: darkslateblue;
+            transition: width .3s, height .5s, background .4s, top .4s, left .7s;
+
+            animation: mover ease 2s
+        }
+    </style>
+</head>
+<body>
+    <div class="tarjeta"></div>
+</body>
+</html>
