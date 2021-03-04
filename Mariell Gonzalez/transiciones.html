@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        @keyframes mover {
+            from {
+                left: 0;
+                top: 0;
+            }
+            to {
+                left: 10rem;
+                top: 10rem;
+            }
+            25% {
+                left: 8rem;
+                top: 8rem;
+            }
+            75% {
+                left: 9rem;
+                top: 9rem;
+            }
+
+            100% {
+                left: 10rem;
+                top: 10rem;
+            }
+            
+        }
+
+        @keyframes regresar {
+           
+            from {
+                left: 0;
+                top: 0;
+            }
+            to {
+                left: 10rem;
+                top: 10rem;
+            }
+            
+            100% {
+                left: 0rem;
+                top: 0rem;
+            }
+            75% {
+                left: 8rem;
+                top: 8rem;
+            }
+            25% {
+                left: 9rem;
+                top: 9rem;
+            }
+            0% {
+                left: 8rem;
+                top: 8rem;
+            }
+            
+        }
+        .tarjeta {
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: inline-block;
+            width: 20rem;
+            height: 20rem;
+
+            background: forestgreen;
+
+            transition: width .3s, height .3s, background 3s, left .3s, top .3s ;
+        }
+
+        .tarjeta:hover {
+            width: 40rem;
+            height: 28rem;
+            left: 10rem;
+            top: 10rem;
+
+
+            background: darkslategray;
+
+            transition: width .3s, height .3s, background 3s, left 3s, top 1s;
+
+            animation: mover ease 2s;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="tarjeta"></div>
+</body>
+</html>
