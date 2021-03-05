@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transiciones</title>
+    <style>
+
+        @keyframes mover {
+            0%{
+                left: 0;
+                top: 0;
+            }
+            25% {
+                left: 8rem;
+                top: 8rem;
+            }
+            75% {
+                left: 9rem;
+                top: 9rem;
+            }
+            100%{
+                left: 10rem;
+                top: 10rem;
+            }
+        }
+
+        @keyframes regresar {
+            100%{
+                left: 0;
+                top: 0;
+            }
+            75% {
+                left: 8rem;
+                top: 8rem;
+            }
+            25% {
+                left: 9rem;
+                top: 9rem;
+            }
+            0%{
+                left: 10rem;
+                top: 10rem;
+            }
+        }
+
+        .tarjeta {
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: inline-block;
+            width: 20rem;
+            height: 20rem;
+            background: rgb(190, 4, 144);
+            transition: width .3s, height .3s, background .3s;
+
+            animation: regresar ease 2s;
+            border-radius: 100%;
+        }
+
+        .tarjeta:hover {
+            left: 10rem;
+            top: 10rem;
+            width: 40rem;
+            height: 28rem;
+            background: rgb(107, 2, 33);
+            transition: width .3s, height .3s, background .3s;
+
+            animation: mover ease 2s;
+            border-radius: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="tarjeta"></div>
+</body>
+</html>
