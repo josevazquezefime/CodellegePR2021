@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .rectangulo{
+            width:65vw;
+            height:5vh;
+            position:absolute
+        }
+        .cuadro-chico{
+            width: 5vw;
+            height: 5vh;
+            right:0.5rem
+        }
+        .cuadro{
+            width: 65vw;
+            height: 15vh;
+            position: absolute;
+        }
+        .circulo{
+            width: 5vw;
+            border-radius: 100%;
+            background: gray;
+        }
+        .circulo-uno{
+            left: 5vw;
+            top: 5vh;
+        }
+        .circulo-dos{
+            left: 17w;
+            top: 5vh;
+        }
+        .circulo-tres{
+            left: 24vw;
+            top: 5vh;
+        }
+    </style>
+</head>
+<body>
+    <div class="rectangulo">
+        <div class="cuadro-chico"></div>
+    </div>
+    <div class="cuadro">
+        <div class="circulo-uno"></div>
+        <div class="circulo-dos"></div>
+        <div class="circulo-tres"></div>
+    </div>
+</body>
+</html>
