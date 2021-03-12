@@ -10,37 +10,31 @@ body, html{
 }
 
 .tarjeta{
-    width:25rem;
-    height:18rem;
+    margin-left: 2rem;
+    margin-top: 2rem;
+    width:18rem;
+    height:25rem;
     display: inline-block;
     border: 2px solid black;
     border-radius: 2%;
+
 }
 
 .titulo{
     text-align: center;
-    border-bottom: 2px solid black;
-    margin: 0;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
 }
-.usuario-img{
-    float: right;
+.event-img{
     display: inline-block;
-    background-image:url(https://image.flaticon.com/icons/png/512/16/16363.png);
-    height: 10rem;
-    width: 30%;
+    background-image:url(https://i.pinimg.com/originals/a8/06/fe/a806fef8ea2a9504f8ed750c9f151645.jpg);
+    height: 11rem;
+    width: 99.5%;
     background-size: 100% 100%;
     border: 2px solid black;
     border-radius: 2%;
-    margin-right: 0.5rem;
 }
-.detalles{
-    float: right;
-    width: 60%;
-    text-align: right;
-    padding-right:  1rem;
-}
+
 .clear{
     clear: both;
 }
@@ -57,4 +51,18 @@ body, html{
 }
 h2{
     font-size: 1rem;
+}
+h1{
+    text-align: center;
+    font-size: 3rem;
+}
+.int-t{
+    text-align: left;
+    font-size: 2rem;
+    margin-left: 2rem;
+}
+.intro{
+    text-align: left;
+    font-size: 1.5rem;
+    margin-left: 2rem;
 }
