@@ -196,37 +196,51 @@ Conceptos básicos
             -Regla CSS
                 #Inicio > article div p.Descripcion span:first-child {}
 
-            *A la regla anterior vamos a definir los siguiente estilos:
-                -> Debe tener un color de texto verde
-                -> Debe tener una fuente de tamaño de 2 rem
-                -> Debe tener un borde negro de 1 px de grosor
-                -> Debe tener una imagen de fondo que se ajuste a su tamaño
-                -> Su tamaño será de 300px de ancho y 180px de altura
+        *A la regla anterior vamos a definir los siguiente estilos:
+            -> Debe tener un color de texto verde
+            -> Debe tener una fuente de tamaño de 2 rem
+            -> Debe tener un borde negro de 1 px de grosor
+            -> Debe tener una imagen de fondo que se ajuste a su tamaño
+            -> Su tamaño será de 300px de ancho y 180px de altura
 
-                #Inicio > article div p.Descripcion span:first-child {
-                    color: green;
-                    font-size: 2rem;
-                    border: 1px solid black;
-                    background-image: url('http://image.png');
-                    background-size: 100% 100%;
-                    width: 300px;
-                    height: 180px;
-                }
+            #Inicio > article div p.Descripcion span:first-child {
+                color: green;
+                font-size: 2rem;
+                border: 1px solid black;
+                background-image: url('http://image.png');
+                background-size: 100% 100%;
+                width: 300px;
+                height: 180px;
+            }
 
-            *Describir la diferencia entre Margin, Border y Padding:
-                -Margin: Separación entre las orillas de la figura y lo que está afuera.
-                -Padding: Es el espaciado interno del elemento. De los bordes hacia dentro.
-                -Border: Es visible, se dibuja y se puede manipular. Son las orillas del elemento.
+        *Describir la diferencia entre Margin, Border y Padding:
+            -Margin: Separación entre las orillas de la figura y lo que está afuera.
+            -Padding: Es el espaciado interno del elemento. De los bordes hacia dentro.
+            -Border: Es visible, se dibuja y se puede manipular. Son las orillas del elemento.
 
-            *Tipos de display:
-                -block: width 100%. No tiene altura.
-                -inline-block: Va en línea, tiene un pequeño margen. Se usa para separar palabras, texto. Se le puede cambiar el tamaño.
-                -inline: Va en línea, pero no se le pueden dar márgenes ni tamaño.
-                -table: Es un bloque que permitirá alinear elementos con display table-row y table-cell. Habilita el vertical-align
-                -table-row: Crear un bloque del tipo row para un display table. Se autoajustan, al número de divisiones por tabla.
-                -table-cell: Crear un bloque del tipo cell para un display table-row. Se autoajustan, al número de divisiones por tabla.
+        *Tipos de display:
+            -block: width 100%. No tiene altura.
+            -inline-block: Va en línea, tiene un pequeño margen. Se usa para separar palabras, texto. Se le puede cambiar el tamaño.
+            -inline: Va en línea, pero no se le pueden dar márgenes ni tamaño.
+            -table: Es un bloque que permitirá alinear elementos con display table-row y table-cell. Habilita el vertical-align
+            -table-row: Crear un bloque del tipo row para un display table. Se autoajustan, al número de divisiones por tabla.
+            -table-cell: Crear un bloque del tipo cell para un display table-row. Se autoajustan, al número de divisiones por tabla.
 
-            *Flotar elementos:
-                -Acomoda los elementos flotando desde la parte superior (Izquierda o derecha)
-                -Para limpiarlo hay que usar un clear
+        *Flotar elementos:
+            -Acomoda los elementos flotando desde la parte superior (Izquierda o derecha)
+            -Para limpiarlo hay que usar un clear
+
+        *Posicionamientos:
+            -Le indica a un elemento que se puede mover en base a las coordenadas top, left, bottom o right de un elemento relativo más cercano...
+            Para esto es necesario tener un elemento con posición relativa y todos los elementos siguientes con posición absoluta se moverán dentro de ese contenedor.
+                -> position: absolute. Activa las coordenadas top, left, bottom y right.
+                -> position: relative. No cambia mucho, solo le permite al elemento ser un contenedor que acepte elementos absolute.
+                -> position: fixed. Al igual que el absolute, se posiciona sobre la ventana del HTML, pero su posición siempre será fija en la pantalla...
+                -> position: sticky. Al igual que el absolute, se posiciona sobre la ventana del HTML, pero su posición siempre será fija en la pantalla... Este respeta el tamaño de su elemento.
+
+Javascript
+Conceptos básicos
+
+    *Qué es Javascript
+        -Es un lenguaje funcional de programación (Web). Es un lenguaje interpretado.
 
