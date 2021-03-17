@@ -130,3 +130,29 @@ function MostrarError( codigo = 0 ) {
 }
 
 MostrarError(3);
+
+console.log("------------------------------")
+//Operadores lógicos
+//AND, OR, XOR, Bitwise, Not
+//Mostrar si un número pertenece al rango 0-20
+var numero = 25;
+
+/*if(numero >= 0) {
+    if(numero <= 20) {
+        console.log('El número: ' + numero + " pertenece al rango 0-20");
+    }
+}*/
+//&& = AND
+if(numero >= 0 && numero <= 20) {
+    console.log('El número: ' + numero + " pertenece al rango 0-20");
+}
+
+console.log("------------------------------")
+var edad = 17;
+
+//|| = OR
+if(edad === 15 || edad === 17) {
+    console.log('Si puede participar');
+} else {
+    console.log('No puede participar');
+}
