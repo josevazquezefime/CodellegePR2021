@@ -155,3 +155,16 @@ if(total > 300) {
 }
 
 console.log(lista);
+
+/**
+ * variables y constantes
+ * tipos de datos
+ * funciones
+ * arreglos
+ * objetos (propiedad, funciones)
+ * operadores airméticos, operadores condicionales
+ * sentencias selectivas (if-else, switch)
+ * operador ternario (condicion ? VALOR1 : VALOR2)
+ * ciclos (for, while, do while)
+ * operadores lógicos (AND, OR)
+ */
