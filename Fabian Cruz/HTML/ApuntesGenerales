@@ -247,3 +247,22 @@ Conceptos básicos
 
     * Qué es Javascript
         - Es un lenguaje funcional de programación (Web). Es un lenguaje interpretado.
+
+
+JQuery
+Es una libreria multi browser que funciona de la misma manera en cualquier
+browser y/o dispositivo
+* Su uso principal es recorrer, buscar y manipular el DOM (arbol de nodos).
+*Puede buscar elementos de la siguiente manera:
+    - Por ID
+    - Por etiquetas.
+    - ....
+    - PERO TODO, LO HACE POR SELECTORES (Clases, por ID, nombre, etc.)
+    $('#ID');
+JQuery tiene dos formas de usarse:
+    - Como objeto con funciones de complemento.
+    - Como funcion de apoyo y busqueda.
+    
+    Cuando es funcion se puede utilizar de dos maneras:
+    $('Selector') // Regresar elementos JQueryHTML
+    $(function()) Evento de onload
