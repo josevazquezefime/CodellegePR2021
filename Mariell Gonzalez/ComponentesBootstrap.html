@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
+<style>
+
+    span {
+        padding: 0.5rem;
+        font-style: italic;
+        background-color: dimgray;
+        transition: color 1s, background 1s, border-radius 1s;
+    }
+    span::before {
+        color: green;
+        content: "*";
+        font-size: 1.5rem;
+    }
+
+    span::after {
+        color:purple;
+        content: "*";
+        font-size: 1.5rem;
+    }
+
+    p ::first-letter {
+        font-weight: bold;
+        color: orangered;
+    }
+
+    p ::first-line {
+        color: powderblue;
+    }
+
+    * ::selection  {
+        color: white;
+        background-color: darkslategray;
+    }
+
+    span:hover {
+        color: white;
+        background: black;
+        border-radius: 60%;
+
+        transition: color 1s, background 1s, border-radius 1s;
+    }
+
+
+
+
+</style>
+
+</head>
+<body>
+    <BUTTON class="btn btn-outline-primary btn-lg d-block d-md-inline-block d-none">Click!</BUTTON>
+    <input class="btn btn-secondary" type="button" value="Click!">
+    
+<p>Hola<br>Mundo</p>
+    <span>Hola</span>
+    <span>HOLA</span>
+</body>
+</html>

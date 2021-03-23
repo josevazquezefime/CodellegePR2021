@@ -1,0 +1,98 @@
+body, html{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+    background:url(https://img.freepik.com/free-photo/white-grey-marble-texture-background_38607-360.jpg?size=626&ext=jpg);
+    background-size: 100% 100%;
+}
+*{ 
+  box-sizing: border-box;
+}
+main{
+    text-align: center;
+}
+.tarjeta{
+    width: 25rem;
+    height: 15rem;
+    margin-bottom: 2rem;
+    background: rgb(40,40,40);
+    display: inline-block;
+    box-shadow: 2px 10px 30px 3px;
+    position: relative;
+}
+.tarjeta > section{
+    position: absolute;
+    left: 2rem;
+    bottom: 2rem;
+}
+.tarjeta section{
+    display: inline-block;
+    font size: 0.65em;
+}
+.tarjeta section h2, .tarjeta section h6{
+    margin: 0;
+    text-align: left;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.golden-text{
+    color: goldenrod;
+    font-weight: lighter;
+}
+.white-text{
+    color: white;
+    font-weight: lighter;
+}
+.gray-text{
+    color: gray;
+    font-weight: lighter;
+}
+.table{
+    display: table;
+    width: 100%;
+    height: 100%;
+
+}
+.table-row{
+    display: table-row;
+}
+.table-cell{
+    display: table-cell;
+    vertical-align: middle;
+}
+.mitad{
+    float: left;
+    width:50%;
+}
+.mitad:first-child{
+ text-align: right;
+ padding-right: 0.5rem;
+ padding-top: 0.5rem;
+}
+.mitad:last-child{
+    text-align: left;
+    color: gray;
+    font-weight: lighter;
+    padding-left: 0.5rem;
+    padding-right: 1rem;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+    border-left: 1px solid white;
+   
+    line-height: 100%;
+}
+.mitad:last-child span{
+    font-size: 0.75rem;
+}
+.direccion{
+    color: white;
+    font-weight:normal;
+    margin-bottom: 1rem;
+}
+.material-icons{
+    color: goldenrod;
+}
+.separado{
+    margin-bottom: 0.4rem;
+}

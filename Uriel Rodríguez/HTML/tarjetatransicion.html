@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <style>
+        @keyframes mover{
+            from{
+                left:0;
+                top:0;
+            }
+            to{
+                left:10rem;
+                top:10rem;
+            }
+        }
+        .tarjeta{
+            display: inline-block;
+            position: absolute;
+            left:0;
+            top:0;
+            width: 20rem;
+            height: 20rem;
+            background: green;
+            text-align: center;
+            transition: width .3s, heigth 1.5s, background 1s;
+        }
+        .tarjeta:hover{
+            width: 40rem;
+            height: 25rem;
+            background: blue;
+            left: 10rem;
+            top: 10rem;
+
+            transition: width .3s, heigth 1.5s, background 1s;
+            
+            animation: mover ease 2s;
+        }
+    </style>
+</head>
+<body>
+    <div class="tarjeta">Hola</div>
+</body>
+</html>
