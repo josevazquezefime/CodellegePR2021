@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posicionamiento</title>
+    <style>
+        .cuadro{
+            width: 15rem;
+            height: 15rem;
+            border: 4px solid black;
+            position: absolute;
+        }
+        .rosa{
+            background: pink;
+            left: 18rem;
+            top: 18rem;
+        }
+        .morado{
+            background:purple;
+            left: 3rem;
+            top: 3rem;
+        }
+        .naranja{
+            background:orange;
+            left: 13rem;
+            top: 13rem;
+        }
+        .verde{
+            background:green;
+            left: 8rem;
+            top: 8rem;
+        }
+        .cuadrito{
+            width: 1rem;
+            height: 1rem;
+            background: gray;
+            position: absolute;
+        }
+        .izquierda{
+            left: 2rem;
+            top: 2rem;
+        }
+        .derecha{
+            right: 2rem;
+            top: 2rem
+        }
+        .izquierda-abajo{
+            left: 2rem;
+            bottom: 2rem
+        }
+        .derecha-abajo{
+            right: 2rem;
+            bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="cuadro morado">
+        <div class="cuadrito izquierda"></div>
+    </div>
+
+    <div class="cuadro verde">
+        <div class="cuadrito derecha"></div>
+    </div>
+    <div class="cuadro naranja">
+        <div class="cuadrito izquierda-abajo"></div>
+    </div>
+    <div class="cuadro rosa">
+        <div class="cuadrito derecha-abajo"></div>
+    </div>
+</body>
+</html>
