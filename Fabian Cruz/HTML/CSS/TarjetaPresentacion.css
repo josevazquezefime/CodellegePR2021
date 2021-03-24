@@ -1,0 +1,93 @@
+body, html {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: url('https://i.pinimg.com/originals/a9/c8/5b/a9c85b36933cf301831db00a7b5b406c.jpg');
+    background-size: 100% 100%;
+}
+* {
+    box-sizing: border-box;
+}
+h1 {
+    color: white;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+}
+main {
+    text-align: center;
+}
+.tarjeta {
+    width: 23rem;
+    height: 15rem;
+    background: rgb(39,41,45);
+    margin-bottom: 2rem;
+    display: inline-block;
+    /* Box-shadow permite dar sombra con los atributos: X - Y - Desenfocar - Reventado */
+    box-shadow: -2rem 3rem 1rem 0rem;
+    position: relative;
+}
+.tarjeta > article {
+    position: absolute;
+    bottom: 3rem;
+    left: 2rem;
+}
+.tarjeta article {
+    display: inline-block;
+}
+.tarjeta article h2, .tarjeta article h6 {
+    display: block;
+    text-align: left;
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+}
+
+.golden-text {
+    color: rgb(188,162,114);
+    font-weight: bold;
+}
+.white-text {
+    color: white;
+}
+.gray-text {
+    color: gray;
+}
+
+.table {
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+.row {
+    display: table-row;
+}
+.cell {
+    display: table-cell;
+    vertical-align: middle;
+}
+.mitad {
+    width: 50%;
+    float: left;
+}
+.mitad:first-child {
+    text-align: right;
+    padding: .5rem;
+}
+/* .mitad:nth-child(2) */
+.mitad:last-child {
+    text-align: left;
+    color: gray;
+    padding-left: .5rem;
+    padding-right: .5rem;
+    border-left: 2px solid white;
+}
+.direction {
+    color: white;
+}
+.material-icons {
+    color: rgb(188,162,114);
+}
+
+.mitad:nth-child(2) span {
+    font-size: .8em;
+}
