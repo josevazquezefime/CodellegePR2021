@@ -57,6 +57,3 @@ for (var i = 0; i < frases.length; i++) {
         </div> 
     </div>`
 }
-
-
-//
