@@ -1,7 +1,10 @@
 var express = require('express');
 
 const app = express();
+<<<<<<< Updated upstream
 app.use(express.static('../'));
+=======
+>>>>>>> Stashed changes
 
 // app.get('/', (req, res) => {
 //         res.status(403).send('Invalid endpoint Request con GET');
@@ -16,6 +19,7 @@ app.use(express.static('../'));
 
 
 
+<<<<<<< Updated upstream
 
 app.get('/products/all', (req, res)=>{
         var productos=[
@@ -55,3 +59,8 @@ app.get('/html',(req, res)=>{
 console.log('ejecutando el servicio en el puerto 666');
 console.log('verificar las peticiones en el eendpoint: http://localhost:666');
 app.listen(666);
+=======
+console.log('ejecutando el servicio en el puerto 666');
+console.log('verificar las peticiones en el eendpoint: http://localhost:666');
+app.listen(666);
+>>>>>>> Stashed changes

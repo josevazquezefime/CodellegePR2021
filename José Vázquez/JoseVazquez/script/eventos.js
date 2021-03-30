@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 var productos = [];
 
 
@@ -77,3 +78,33 @@ function MostrarDetalleProducto(productIndex) {
 //   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 // </div>`);
 // }
+=======
+var productos=[{
+    name: "iPhone 12 Pro Max",
+    brand: "Apple",
+    description: "Apple iphone 12 Max Pro",
+    image: "image",
+    price: 1800.50
+
+}
+];
+$
+for (let index = 0; index < array.length; index++) {
+    const element = array[index];
+    
+}
+function MostrarMensaje(){ 
+    $('body').prepend(
+        `<div class="alert alert-warning alert-dismissible fade show custom-alert" role="alert">
+        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>`);
+}
+
+function MostrarDetalleProducto(){
+    var modal=$('.modal');
+    modal.find('h5').text('Apple iphone 12 Max Pro')
+    modal.find('.modal-body p').text('Apple iphone 12 Max Pro')
+    $('.modal').modal('.toggle');
+}
+>>>>>>> Stashed changes
