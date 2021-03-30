@@ -1,10 +1,14 @@
 var express = require('express');
 
 const app = express();
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 app.use(express.static('../'));
 =======
 >>>>>>> Stashed changes
+=======
+app.use(express.static('../'));
+>>>>>>> main
 
 // app.get('/', (req, res) => {
 //         res.status(403).send('Invalid endpoint Request con GET');
@@ -19,7 +23,10 @@ app.use(express.static('../'));
 
 
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
+=======
+>>>>>>> main
 
 app.get('/products/all', (req, res)=>{
         var productos=[
@@ -49,6 +56,7 @@ app.get('/products/all', (req, res)=>{
                     }
             ];
             res.send(productos);
+<<<<<<< HEAD
 
 });
 app.get('/html',(req, res)=>{
@@ -64,3 +72,10 @@ console.log('ejecutando el servicio en el puerto 666');
 console.log('verificar las peticiones en el eendpoint: http://localhost:666');
 app.listen(666);
 >>>>>>> Stashed changes
+=======
+});
+
+console.log('ejecutando el servicio en el puerto 666');
+console.log('verificar las peticiones en el eendpoint: http://localhost:666');
+app.listen(666);
+>>>>>>> main
