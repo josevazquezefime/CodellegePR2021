@@ -1,15 +1,9 @@
 var productos = [];
 
 $(function () {
-
-    //Asynchronous Javascript And XML
-    var AJAX = new XMLHttpRequest(); //Estado inicial 0
-    AJAX.onreadystatechange = function () {
-        //State 3: Downloading
-        if (this.readyState === 4) {
-            if (this.status === 200) {
-                productos = JSON.parse(this.responseText);
-                for (var i = 0; i < productos.length; i++) {
+$.get('Http//:localhost:666/poducts/all', function (response) {
+    productos = response;
+for (var i = 0; i < productos.length; i++) {
                     const producto = productos[i];
                     $('body').append(
                         `<div class="card mb-3 producto" onclick="MostrarDetalleProducto(${i})">
@@ -28,11 +22,9 @@ $(function () {
                             </div>
                         </div>
                      </div>`);
-                }
-            }
         }
         //State 4: Finish
-    };
+    });
     AJAX.open('GET', 'http://localhost:666/products/all'); //State: 1
     AJAX.send(); //State: 2
 });
