@@ -1,14 +1,54 @@
 var express = require('express');
 
 const app = express();
-<<<<<<< HEAD
-<<<<<<< Updated upstream
+
 app.use(express.static('../'));
-=======
->>>>>>> Stashed changes
-=======
-app.use(express.static('../'));
->>>>>>> main
+
+
+
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://joseV:zxn3w100QWERTY@cluster0.fbjan.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { 
+    useNewUrlParser: true, 
+    useUnifiedTopology: true 
+});
+client.connect(async error => {
+    if(error){
+        console.log('ocurrió un erros al intentar conectarse a mongo: ' + error);
+        return;
+    }
+
+    console.log('se ha conectado correctamente a la base de datos de mongo');
+    
+    const cosas = client.db("Prueba").collection("Cosas");
+    var numeros = [13, 67, 456, 123, 7567, 23, 34];
+
+    /*for (var i = 0; i < numeros.length; i++) {
+        const numero = numeros[i];
+        cosas.insertOne({
+            name: "Nuevo número",
+            num: numero
+        });
+    }
+    */
+  /* cosas.deleteMany({
+       num: {$lte: 50}
+});
+*/
+
+// var datos = await cosas.find().toArray();
+// console.log(datos);
+
+// var dato = await cosas.findOne({
+//     num: 456
+// });
+// console.log(dato);
+
+cosas.updateOne({num: 456}, {$set: {name:"Esto se actualizó", num: 678}});
+cosas.updateMany({name: "Nuevo número"},{$set:{name:"Viejo número"}});
+
+});
+
 
 // app.get('/', (req, res) => {
 //         res.status(403).send('Invalid endpoint Request con GET');
@@ -22,11 +62,6 @@ app.use(express.static('../'));
 // });
 
 
-
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
->>>>>>> main
 
 app.get('/products/all', (req, res)=>{
         var productos=[
@@ -56,7 +91,7 @@ app.get('/products/all', (req, res)=>{
                     }
             ];
             res.send(productos);
-<<<<<<< HEAD
+
 
 });
 app.get('/html',(req, res)=>{
@@ -67,15 +102,6 @@ app.get('/html',(req, res)=>{
 console.log('ejecutando el servicio en el puerto 666');
 console.log('verificar las peticiones en el eendpoint: http://localhost:666');
 app.listen(666);
-=======
-console.log('ejecutando el servicio en el puerto 666');
-console.log('verificar las peticiones en el eendpoint: http://localhost:666');
-app.listen(666);
->>>>>>> Stashed changes
-=======
-});
 
-console.log('ejecutando el servicio en el puerto 666');
-console.log('verificar las peticiones en el eendpoint: http://localhost:666');
-app.listen(666);
->>>>>>> main
+
+
