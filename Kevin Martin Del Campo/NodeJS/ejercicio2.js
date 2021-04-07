@@ -33,6 +33,10 @@ app.get('/products/all', (req, res) => {
     res.send(productos);
 });
 
+app.get('/html', (req, res) =>{
+    res.send('<h1>HOLA!</h1>');
+});
+
 console.log('Ejecutando el servicio en el puerto: 666');
 console.log('Verificar las peticiones en el endpoint: http://localhost:666');
 app.listen(666);
