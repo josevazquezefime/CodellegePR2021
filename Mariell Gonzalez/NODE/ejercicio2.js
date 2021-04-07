@@ -7,6 +7,16 @@ function ProcesarPeticionGeneral (req, res) {
     res.status (200) .send ('Hola, vengo de express');
 
 }
+// conect mongod 
+
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://MariellGzz:<password>@cluster0.0drkx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  client.close();
+});
 
 //genera una app de express 
 
