@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 const PORT = 666;
 
 const uri = "mongodb+srv://kmcf:spgg2021@cluster0.lh9dp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
@@ -16,9 +17,14 @@ mongoose.connect(uri, {
         console.log('Server cluster Port: ' + mongoose.connection.port);
     }
 });
-const app = express();
 
-var routerUsers = require('./routers/users')
+const app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+
+var routerUsers = require('./routers/users');
 app.use('/users', routerUsers);
 
 app.listen(PORT);

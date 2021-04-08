@@ -18,6 +18,14 @@ router.post('/register', async (req, res) =>{
     //O sea, aquí vienen los datos
     var datosUsuario = req.body;
 
+    //OR en el query de Mongo
+    var userExists = await User.findOne({ $or: [{ nickname: datosUsuario.nickname }, { email: datosUsuario.email }] });
+    if(userExists) {
+        return res.status(401).send({
+            error: "El usuario con este nickname/correo ya existe"
+        });
+    }
+
     var usuarioRegistrado = new User({
         nickname: datosUsuario.nickname,
         name: datosUsuario.name,
