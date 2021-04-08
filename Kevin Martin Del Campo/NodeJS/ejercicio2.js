@@ -3,6 +3,59 @@ var express = require('express');
 const app = express();
 app.use(express.static('../'));
 
+//Conexión al servidor de mongo (Atlas)
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://kmcf:spgg2021@cluster0.lh9dp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const client = new MongoClient(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
+
+client.connect(async error => {
+    if(error) {
+        console.log('Ocurrió un error al intentar conectarse a Mongo: ' + error);
+        return;
+    }
+
+    console.log('Se ha conectado correctamente a la base de datos de Mongo');
+    
+    const cosas = client.db("Prueba").collection("cosas");
+    var numeros = [13, 67, 456, 123, 7567, 23, 34];
+
+    /*for (var i = 0; i < numeros.length; i++) {
+        const numero = numeros[i];
+        cosas.insertOne({
+            name: "Nuevo número",
+            num: numero
+        });
+    }*/
+
+    //DELETE FROM cosas WHERE num <= 50
+    /*cosas.deleteMany({
+        num: { $lte: 50 }
+        //$lte -> menor o igual
+        //$gte -> mayor o igual
+        //$lt -> menor
+        //$gt -> mayor
+        //$eq -> igual
+        //$ne -> diferente
+    });*/
+
+    /*var datos = await cosas.find().toArray();
+    console.log(datos);
+
+    var dato = await cosas.findOne({
+        num: 456
+    });
+    console.log(dato);
+    */
+
+    cosas.updateOne({ num: 456 }, { $set: { name: "Esto se actualizó", num: 678 } });
+    cosas.updateMany({ name: "Nuevo número"}, {$set: { name: "Viejo número" } } );
+    
+    //Mongoose
+});
+
 app.get('/products/all', (req, res) => {
     var productos = [{
             name: "iPhone 12 Pro Max",
@@ -31,6 +84,10 @@ app.get('/products/all', (req, res) => {
     ];
 
     res.send(productos);
+});
+
+app.get('/html', (req, res) => {
+    res.send('<h1>HOLA!</h1>');
 });
 
 console.log('Ejecutando el servicio en el puerto: 666');
