@@ -8,9 +8,26 @@ const router = express.Router();
 const User = require('../models/user');
 
 router.get('/all', async (req, res) => {
-    var users = await User.find({});
+    var users = await User.find({}, {__v: 0, _id: 0});
 
     res.send(users);
+});
+
+router.get('/:nickname', async (req, res) =>{
+
+    var parametros = req.params;
+    var nickname = parametros.nickname;
+
+    var user = await User.findOne({ nickname: nickname }, { __v: 0, _id: 0, password: 0 });
+    //findOne puede regresar null o el usuario
+    if(!user) {
+        //User no existe
+        return res.status(404).send({
+            message: "El usuario: " + nickname + " no existe"
+        });
+    }
+
+    return res.send(user);
 });
 
 router.post('/register', async (req, res) =>{
@@ -38,6 +55,19 @@ router.post('/register', async (req, res) =>{
     res.send({
         message: 'Usuario registrado correctamente'
     });
+});
+
+router.delete('/:nickname', async (req, res) => {
+
+    var parametros = req.params;
+    var nickname = parametros.nickname;
+    
+    var usuarioBorrado = await User.deleteOne({nickname: nickname});
+
+    res.send({
+        message: "Se ha borrado el usuario: " + nickname
+    });
+
 });
 
 //Exportar o generar el módulo users.js
