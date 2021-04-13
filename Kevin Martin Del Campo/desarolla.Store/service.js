@@ -27,4 +27,7 @@ app.use(bodyParser.urlencoded({
 var routerUsers = require('./routers/users');
 app.use('/users', routerUsers);
 
+var routerProducts = require('./routers/products');
+app.use('/products', routerProducts);
+
 app.listen(PORT);
