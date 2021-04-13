@@ -8,7 +8,7 @@ mongoose.connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }, error => {
-    if(error) {
+    if (error) {
         console.log("Error connecting to the database");
         console.log(error);
     } else {
@@ -18,7 +18,7 @@ mongoose.connect(uri, {
     }
 });
 const app = express();
-app.use(express.json());
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
