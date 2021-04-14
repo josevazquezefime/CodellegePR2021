@@ -1,10 +1,7 @@
-//Referencia del servidor de express
 const express = require('express');
 
-//Crear un enrutador para este micro-servicio
 const router = express.Router();
 
-//Importar nuestro modelo de datos
 const User = require('../models/user');
 
 router.get('/all', async (req, res) => {
@@ -28,9 +25,9 @@ router.get('/:nickname', async (req, res) => {
         _id: 0,
         password: 0
     });
-    //findOne puede regresar null o el usuario
+    
     if (!user) {
-        //User no existe
+      
         return res.status(404).send({
             message: "El usuario: " + nickname + " no existe"
         });
@@ -40,11 +37,9 @@ router.get('/:nickname', async (req, res) => {
 });
 
 router.post('/register', async (req, res) => {
-    //El parámetro 'req' contiene toda la información que se envía para generar esta petición
-    //O sea, aquí vienen los datos
+ 
     var datosUsuario = req.body;
 
-    //OR en el query de Mongo
     var userExists = await User.findOne({
         $or: [{
             nickname: datosUsuario.nickname
@@ -78,23 +73,15 @@ router.put('/:nickname', async (req, res) => {
 
     var user = await User.findOne({ nickname: nickname });
 
-    //findOne puede regresar null o el usuario
     if (!user) {
-        //User no existe
         return res.status(404).send({
             message: "El usuario: " + nickname + " no existe"
         });
     }
 
-    //Los objetos en JS también se les conoce como Key-Value Pair
-    //{ key: value }
-    //key es único
-    //{ name: "abc" }
+
     var propiedades = Object.keys(userData);
-    //Regresa un array [Strings]
-    //['name', 'OtraPropiedad', 'lastName']
-    //Esto funcionará porque puedo acceder a una propiedad de un objeto
-    //de manera tipo Hashing: userData["name"] -> userData.name
+
 
     for (var i = 0; i < propiedades.length; i++) {
         const propiedad = propiedades[i];
@@ -145,6 +132,5 @@ router.delete('/:nickname', async (req, res) => {
 
 });
 
-//Exportar o generar el módulo users.js
-//Para ello debemos exportar aquello que contenga a todo la información
+
 module.exports = router;

@@ -1,14 +1,13 @@
-//Referencia del servidor de express
+
 const express = require('express');
 
-//Crear un enrutador para este micro-servicio
+
 const router = express.Router();
 
-//Importar nuestro modelo de datos
+
 const Product = require('../models/product');
 
-//Endpoint para ver todos los productos
-//GET -> /all
+
 router.get('/all', async (req, res) =>{
     var productos = await Product.find({}, {
         _id: 0,
@@ -18,8 +17,23 @@ router.get('/all', async (req, res) =>{
     res.send(productos);
 });
 
-//Endpoint para crear un producto
-//POST -> /new
+function ToRegex( texto ) {
+
+    var textoRegex = "";
+
+    //Suponiendo que el texto es "aspirador auto"
+    for (var i = 0; i < texto.length; i++) {
+        const caracter = texto.charAt(i);
+        if(caracter === ' ') {
+            textoRegex += ".*";
+        } else {
+            textoRegex += '[' + caracter.toUpperCase() + caracter.toLowerCase() + ']';
+        }
+    } //[Aa][Ss][Pp][Ii][Rr][Aa][Dd][Oo][Rr].*[Aa][Uu][Tt][Oo]
+
+    return textoRegex;
+}
+
 router.post('/new', async (req, res) =>{
     var productData = req.body;
 
@@ -49,7 +63,6 @@ router.post('/new', async (req, res) =>{
 
 });
 
-//Endpoint para ver un producto en específico
 router.get('/:sku', async (req, res) =>{
     var sku = req.params.sku;
 
@@ -67,7 +80,6 @@ router.get('/:sku', async (req, res) =>{
     res.send(producto);
 });
 
-//Endpoint para borrar un producto en específico
 router.delete('/:sku', async (req, res) =>{
     var sku = req.params.sku;
 
@@ -88,6 +100,4 @@ router.delete('/:sku', async (req, res) =>{
     });
 });
 
-//Exportar o generar el módulo users.js
-//Para ello debemos exportar aquello que contenga a todo la información
 module.exports = router;
