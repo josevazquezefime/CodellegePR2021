@@ -1,36 +1,114 @@
-// referencia del servidor de express
-const express = require ('express');
-//crear un enrutador para este micro-servicio
-const router = express.Router ();
-//importar nuestro modelo de datos 
-const User = requite ('../models/user');
+//Referencia del servidor de express
+const express = require('express');
+
+//Crear un enrutador para este micro-servicio
+const router = express.Router();
+
+//Importar nuestro modelo de datos
+const User = require('../models/user');
 
 router.get('/all', async (req, res) => {
-//router que regrese todos los usuarios 
-var users =User.find({});
+    var users = await User.find({});
 
-res.send (users); 
-//lo regresa en las peticiones del servicio 
-}); 
-
-router.post('/register', async (req, res) =>{
-//el parametro "req" contiene toda la infromacion que se envia para generar esta peticion 
-// osea, aqui vienen los datos 
-var datoUsuario =req.body;
-
-var usuarioRgistrado = new User ({
-    nickname: datosUsuario.nickname, 
-    name: datosUsuario.name, 
-    lastName: datosUsuario, lastName, 
-    email: datosUsuario.email,
-    password: datosUsuario.password
-});
-    await usuarioRegistrado.save();
-    res.send({
-        message: 'Usuario registrado correctamente'
-    });
+    res.send(users);
 });
 
-//esportar o generar el modulo users.js 
-//para ello debemos exportar aquillo que contenga a toda la informacion 
-module.exports =router; 
+router.get('/:nickname', async (req, res) => {
+    var parametros = req.params;
+    var nickname = parametros.nickname;
+
+    var user = await User.findOne({
+        nickname: nickname}); 
+        
+    //findone puede regresar null o el usuario 
+    if (!user) {
+        //user no existe 
+        return res.status(404).send({
+            message: "El usuario:" + nickname + "no existe"
+        });
+    }
+    return res.send(user);
+});
+
+router.post('/register', async (req, res) => {
+            //El parámetro 'req' contiene toda la información que se envía para generar esta petición
+            //O sea, aquí vienen los datos
+            var datosUsuario = req.body;
+
+            var userExists = await User.findOne({
+                $or: [{
+                    nickname: datosUsuario.nickname
+                }, {
+                    email: datosUsuario.email
+                }]
+            });
+            if (userExists) {
+                return res.status(400).send({
+                    error: "El usuario con este nickname ya existe"
+                });
+            }
+   
+
+
+                router.put('/register', async (req, res) => {
+                    const nickname = req.params.nickname; 
+                    const userData = req.body; 
+                });
+
+                var usuarioRegistrado = new User({
+                    nickname: datosUsuario.nickname,
+                    name: datosUsuario.name,
+                    lastName: datosUsuario.lastName,
+                    email: datosUsuario.email,
+                    password: datosUsuario.password
+                });
+
+                await usuarioRegistrado.save();
+                res.send({
+                    message: 'Usuario registrado correctamente'
+                });
+            }
+
+        router.delete('/:nickname', async (req, res) => {
+            var parametros = req.params;
+            var nickname = parametros.nickname;
+
+            var usuarioBorrado = await User.deleteOne({
+                nickname: nickname
+            });
+            res.send({
+                message: "Se ha borrado el usuario:" + nickname
+            });
+        }
+
+        router.put('/:nickname', async (req, res) => {
+            const nickname = req.params.nickname;
+            const userData = req.body;
+
+            var user = await User.findOne ({ nickname: nickname });
+
+            //findone puede regresar null o el usuario 
+    if (!user) {
+        //user no existe 
+        return res.status(404).send({
+            message: "El usuario:" + nickname + "no existe"
+        });
+    }
+
+    if (userData.name) {
+        user.name =userData.name;
+    }
+
+        if (userData.lastName) {
+            user.lastName = userData.lastName; 
+        }
+    
+  res.send ({
+      message: "Se actualizó el usuario correctamente"
+  });
+    
+    
+};
+        //Exportar o generar el módulo users.js
+        //Para ello debemos exportar aquello que contenga a todo la información
+        module.exports = router;

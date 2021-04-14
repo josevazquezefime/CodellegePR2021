@@ -1,4 +1,4 @@
-const mongoose = required ('mongoose');
+const mongoose = require ('mongoose');
 
 //generar nuestro propio modulo 
 module.exports = mongoose.model('User', new mongoose.Schema({
