@@ -7,6 +7,9 @@ const router = express.Router();
 //Importar nuestro modelo de datos
 const User = require('../models/user');
 
+//IMPORTAR el modulo validate
+const Validate = require ('../validation/validate');
+
 router.get('/all', async (req, res) => {
     var users = await User.find({});
 
@@ -34,6 +37,16 @@ router.post('/register', async (req, res) => {
             //El parámetro 'req' contiene toda la información que se envía para generar esta petición
             //O sea, aquí vienen los datos
             var datosUsuario = req.body;
+
+            //Validamos que la informacion necesaria se haya previsto de manera correcta
+            const {error} = validate.registration (datosUsuario); 
+            if(error) {
+                return res.stuatus (404).send ({
+                    error: error.details [0].message
+                });
+            }
+
+            //OR en el wuary de MONGO 
 
             var userExists = await User.findOne({
                 $or: [{
@@ -69,7 +82,7 @@ router.post('/register', async (req, res) => {
                 });
             }
 
-        router.delete('/:nickname', async (req, res) => {
+            router.delete('/:nickname', async (req, res) => {
             var parametros = req.params;
             var nickname = parametros.nickname;
 
