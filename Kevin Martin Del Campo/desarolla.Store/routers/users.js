@@ -10,8 +10,17 @@ const User = require('../models/user');
 //Importar el módulo de validate
 const Validate = require('../validation/validate');
 
+//Importar el módulo de utilities
+const Utils = require('../utils/utils');
+
 
 router.get('/all', async (req, res) => {
+
+    var userIsAdmin = await Utils.isAdmin(req, res);
+    if(!userIsAdmin) {
+        return;
+    }
+
     var users = await User.find({}, {
         __v: 0,
         _id: 0
@@ -88,7 +97,15 @@ router.post('/register', async (req, res) => {
 
 router.put('/:nickname', async (req, res) => {
     const nickname = req.params.nickname;
+    const usuarioActual = req.cookies["SESSIONID"];
     const userData = req.body;
+
+    if(nickname !== usuarioActual) {
+        var userIsAdmin = await Utils.isAdmin(req, res);
+        if(!userIsAdmin) {
+            return;
+        }
+    }
 
     var user = await User.findOne({
         nickname: nickname
@@ -147,6 +164,11 @@ router.put('/:nickname', async (req, res) => {
 });
 
 router.delete('/:nickname', async (req, res) => {
+
+    var userIsAdmin = await Utils.isAdmin(req, res);
+    if(!userIsAdmin) {
+        return;
+    }
 
     var parametros = req.params;
     var nickname = parametros.nickname;
