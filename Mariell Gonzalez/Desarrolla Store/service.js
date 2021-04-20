@@ -3,7 +3,7 @@ const mongoose = require ('mongoose');
 const bodyParser = require ('body-parser');
 const PORT = 666; 
 
-const uri = 'mongodb+srv://MariellGzz:Pachon99@cluster0.0drkx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+const uri = 'mongodb+srv://MariellGzz:Pachon99@cluster0.0drkx.mongodb.net/SPGG?retryWrites=true&w=majority';
 mongoose.connect(uri, {
     useNewUrlParser: true, 
     useUnifiedTopology: true 
