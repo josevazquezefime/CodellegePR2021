@@ -1,7 +1,7 @@
-const mongoose = require ('mongoose');
+const mongoose = require('mongoose');
 
-//generar nuestro propio modulo 
-module.exports = mongoose.model('User', new mongoose.Schema({
+//Generar nuestro propio módulo
+module.exports = mongoose.model( 'User', new mongoose.Schema({
     nickname: String,
     name: String,
     lastName: String,
@@ -16,6 +16,5 @@ module.exports = mongoose.model('User', new mongoose.Schema({
     password: String,
     phone: Number,
     userType: String
-
 }), 'Users' );
 
