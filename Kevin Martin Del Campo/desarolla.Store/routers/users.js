@@ -218,6 +218,7 @@ router.post('/login', async (req, res) => {
         });
     }
 
+    //Crea la cookie SESSIONID
     res.cookie('SESSIONID', usuario.nickname);
     res.send({
         message: "Se ha iniciado sesión correctamente"
@@ -227,6 +228,7 @@ router.post('/login', async (req, res) => {
 
 //Logout
 router.post('/logout', async (req, res) => {
+    //Borra la cookie SESSIONID
     res.clearCookie('SESSIONID');
 
     res.send({

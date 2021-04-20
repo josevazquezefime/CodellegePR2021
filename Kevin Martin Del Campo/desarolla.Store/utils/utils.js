@@ -3,6 +3,7 @@ const User = require('../models/user');
 
 module.exports = {
     isAdmin: async function( req, res ){
+        //Extrae la cookie SESSIONID
         var sessionID = req.cookies["SESSIONID"];
         
         //Si no existe la cookie de sesión, indicar que debe iniciar sesión
@@ -22,5 +23,10 @@ module.exports = {
             error: "El usuario no tiene privilegios para realizar esta operación"
         });
         return false;
+    },
+    genCartID: function() {
+        var epoch = Date.now() + '' + Date.now() + '' + Date.now();
+        epoch = Buffer.from(epoch).toString('base64');
+        return epoch;
     }
 };
