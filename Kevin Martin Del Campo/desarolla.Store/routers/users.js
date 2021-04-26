@@ -237,5 +237,5 @@ router.post('/logout', async (req, res) => {
 });
 
 //Exportar o generar el módulo users.js
-//Para ello debemos exportar aquello que contenga a todo la información
+//Para ello debemos exportar aquello que contenga a toda la información
 module.exports = router;
