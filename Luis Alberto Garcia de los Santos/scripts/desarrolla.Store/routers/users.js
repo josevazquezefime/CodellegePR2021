@@ -7,7 +7,26 @@ const router = express.Router();
 //Importar nuestro modelo de datos
 const User = require('../models/user');
 
+//Importar el modulo de validate
+const Validate = require('../validation/validate');
+
+//Importar el modulo de utilidades
+const Utils = require('../utils/utils');
+
 router.get('/all', async (req, res) => {
+
+    var userIsAdmin = Utils.isAdmin(req, res);
+    if(!userIsAdmin){
+        var usuarioActual = req.cookies["SESSIONID"];
+        if(usuarioActual !== nickname) {
+            res.status(403).send({
+                message: "Este usuario no puede ver esta informacion"
+            })
+            return;
+        }
+        
+    }
+
     var users = await User.find({}, {
         __v: 0,
         _id: 0
@@ -44,6 +63,14 @@ router.post('/register', async (req, res) => {
     //O sea, aquí vienen los datos
     var datosUsuario = req.body;
 
+    //validamos que la infomracion necesaria se haya provisto de manera correcta
+    const { error } = Validate.registration(datosUsuario);
+    if(error) {
+        return res.status(400).send({
+            error: error.details[0].message
+        });
+    }
+
     //OR en el query de Mongo
     var userExists = await User.findOne({
         $or: [{
@@ -73,6 +100,12 @@ router.post('/register', async (req, res) => {
 });
 
 router.put('/:nickname', async (req, res) => {
+
+    var userIsAdmin = await Utils.isAdmin(req. res);
+    if(!userIsAdmin){
+        return;
+    }
+
     const nickname = req.params.nickname;
     const userData = req.body;
 
@@ -132,6 +165,11 @@ router.put('/:nickname', async (req, res) => {
 
 router.delete('/:nickname', async (req, res) => {
 
+    var userIsAdmin = Utils.isAdmin(req, res);
+    if(!userIsAdmin){
+        return;
+    }
+
     var parametros = req.params;
     var nickname = parametros.nickname;
 
@@ -143,6 +181,55 @@ router.delete('/:nickname', async (req, res) => {
         message: "Se ha borrado el usuario: " + nickname
     });
 
+});
+
+//Sesiones
+//Regularmente se mantienen a traves de algo llamado Cookie
+router.post('/login', async (req, res) => {
+    var datosLogin = req.body;
+
+    const { error } = Validate.login(datosLogin);
+    if(error) {
+        return res.status(400).send({
+            error: error.details[0].message
+        });
+    }
+
+    if (!datosLogin.nickname && !datosLogin.email) {
+        return res.status(403).send({
+            error: "Necesita especificar un nickname o correo para iniciar sesión"
+        });
+    }
+
+    var usuario = await User.findOne({
+        $or: [{
+            nickname: datosLogin.nickname
+        }, {
+            email: datosLogin.email
+        }],
+        password: datosLogin.password
+    });
+
+    if(!usuario) {
+        return res.status(404).send({
+            error: "Datos incorrectos de inicio de sesion. Verifique el user/password"
+        });
+    }
+
+    res.cookie('SESSIONID', usuario.nickname);
+    res.send({
+        message: "Se ha iniciado sesion correctamente"
+    });
+
+});
+
+//Logout
+router.post('/logout', async (req, res) => {
+    res.clearCookie('SESSIONID');
+
+    res.send({
+        message: "Se ha desloggeado y se ha borrado la sesion"
+    });
 });
 
 //Exportar o generar el módulo users.js

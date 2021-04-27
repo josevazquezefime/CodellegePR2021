@@ -7,6 +7,9 @@ const router = express.Router();
 //Importar nuestro modelo de datos
 const Product = require('../models/product');
 
+//Importar el modulo de validate
+const Validate = require('../validation/validate');
+
 //Endpoint para ver todos los productos
 //GET -> /all
 router.get('/all', async (req, res) =>{
@@ -22,6 +25,13 @@ router.get('/all', async (req, res) =>{
 //POST -> /new
 router.post('/new', async (req, res) =>{
     var productData = req.body;
+
+    const { error } = Validate.newProduct(productData);
+    if(error) {
+        return res.status(400).send({
+            error: error.details[0].message
+        });
+    }
 
     var productExists = await Product.findOne({
         sku: productData.sku
