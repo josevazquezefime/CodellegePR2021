@@ -8,7 +8,7 @@ router.get('/all', function(req, res) {
     
 });
 
-router.get('/post/:RequestID', function(req, res) {
+router.get('/request/:RequestID', function(req, res) {
     var requestID = req.params.RequestID;
 });
 

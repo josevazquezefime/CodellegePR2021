@@ -7,7 +7,7 @@ router.get('/all', function(req, res) {
     
 });
 
-router.get('/post/:PetID', function(req, res) {
+router.get('/pet/:PetID', function(req, res) {
     var petID = req.params.PetID;
 });
 

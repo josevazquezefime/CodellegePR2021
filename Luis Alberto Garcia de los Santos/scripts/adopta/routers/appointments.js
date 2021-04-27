@@ -11,7 +11,7 @@ router.get('/all', function(req, res) {
     
 });
 
-router.get('/post/:AppointmentID', function(req, res) {
+router.get('/appointment/:AppointmentID', function(req, res) {
     var appointmentID = req.params.AppointmentID;
 });
 
