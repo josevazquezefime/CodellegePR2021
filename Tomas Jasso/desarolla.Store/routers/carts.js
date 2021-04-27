@@ -228,3 +228,12 @@ router.patch('/add', async (req, res) =>{
 //Exportar o generar el módulo carts.js
 //Para ello debemos exportar aquello que contenga a todo la información
 module.exports = router;
+
+router.put('/viewCart', async (req, res) =>{
+    const cart = req.body;
+    var cart = await Cart.findOne({ id: cartID });
+
+    if(cart) {
+        
+    }
+}
