@@ -5,6 +5,7 @@ const router = express.Router();
 const Appointment = require('../models/appointment');
 const Visit = require('../models/visit');
 
+//Pendiente de utilizar la variable type para diferenciar entre Cita y Visita
 
 router.get('/all', function(req, res) {
     
