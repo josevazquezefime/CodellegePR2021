@@ -10,6 +10,9 @@ const Product = require('../models/product');
 //Importar el módulo de validate
 const Validate = require('../validation/validate');
 
+//Importar el módulo de utilities
+const Utils = require('../utils/utils');
+
 //Endpoint para ver todos los productos
 //GET -> /all
 router.get('/all', async (req, res) => {
@@ -24,6 +27,12 @@ router.get('/all', async (req, res) => {
 //Endpoint para crear un producto
 //POST -> /new
 router.post('/new', async (req, res) => {
+    
+    var userIsAdmin = await Utils.isAdmin(req, res);
+    if(!userIsAdmin) {
+        return;
+    }
+
     var productData = req.body;
 
     const { error } = Validate.newProduct(productData);
@@ -160,6 +169,12 @@ router.get('/:sku', async (req, res) => {
 
 //Endpoint para borrar un producto en específico
 router.delete('/:sku', async (req, res) => {
+
+    var userIsAdmin = await Utils.isAdmin(req, res);
+    if(!userIsAdmin) {
+        return;
+    }
+
     var sku = req.params.sku;
 
     var productExists = await Product.findOne({
@@ -185,6 +200,12 @@ router.delete('/:sku', async (req, res) => {
 
 //Endpoint para actualizar un producto en específico
 router.put('/:sku', async (req, res) => {
+
+    var userIsAdmin = await Utils.isAdmin(req, res);
+    if(!userIsAdmin) {
+        return;
+    }
+    
     var sku = req.params.sku;
     var productData = req.body;
 
