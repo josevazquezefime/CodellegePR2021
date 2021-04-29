@@ -91,15 +91,37 @@ router.get('/getCart', async (req, res) =>{
 
 });
 
+
+router.put('/viewCart', async (req, res) =>{
+    const cart = req.body;
+    var cart = await Cart.findOne({ id: cartID };
+        _id: 0,
+        __v: 0
+});
+
+    if(cart) {
+        return res.send(cart);
+    }
+
+    res.status(404).send({
+        error: "El carrito " + cartID + " no existe"
+    });
+
+
+//Endpoint del tipo PATCH para añadir/actualizar productos
+// Para añadir un producto, necesitamos mandar el ID del producto (sku)
+// Buscamos ese producto en la BDD y si se encuentra el producto, lo añadimos, si no, ignorarlo
+// Mandamos la informacion a traves del body { productID: 12345, qty: 1 }
+// Los productos nuevos se añaden en el Cart.products... Es un array que tiene cada carrito de la BDD
+// Recuerden que debe recuperar el carrito de la cookie
+// Los productos que ya existen, añadir a su cantidad el qty que tiene
+// Todo esto afecta al Cart... Tanto en total, quantity, basado en el products
+
+
+
+
+
 //Exportar o generar el módulo carts.js
 //Para ello debemos exportar aquello que contenga a todo la información
 module.exports = router;
 
-router.put('/viewCart', async (req, res) =>{
-    const cart = req.body;
-    var cart = await Cart.findOne({ id: cartID });
-
-    if(cart) {
-        
-    }
-}
