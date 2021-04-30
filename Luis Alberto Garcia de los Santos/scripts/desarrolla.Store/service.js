@@ -28,8 +28,13 @@ app.use(cookieParser());
 
 var routerUsers = require('./routers/users');
 app.use('/users', routerUsers);
+//localhost:666/users/...
 
 var routerProducts = require('./routers/products');
 app.use('/products', routerProducts);
+//localhost:666/products/...
+
+var routerCarts = require('./routers/carts');
+app.use('/carts', routerCarts);
 
 app.listen(PORT);

@@ -7,12 +7,15 @@ const router = express.Router();
 //Importar nuestro modelo de datos
 const Product = require('../models/product');
 
-//Importar el modulo de validate
+//Importar el módulo de validate
 const Validate = require('../validation/validate');
+
+//Importar el módulo de utilities
+const Utils = require('../utils/utils');
 
 //Endpoint para ver todos los productos
 //GET -> /all
-router.get('/all', async (req, res) =>{
+router.get('/all', async (req, res) => {
     var productos = await Product.find({}, {
         _id: 0,
         __v: 0
@@ -23,11 +26,17 @@ router.get('/all', async (req, res) =>{
 
 //Endpoint para crear un producto
 //POST -> /new
-router.post('/new', async (req, res) =>{
+router.post('/new', async (req, res) => {
+    
+    var userIsAdmin = await Utils.isAdmin(req, res);
+    if(!userIsAdmin) {
+        return;
+    }
+
     var productData = req.body;
 
     const { error } = Validate.newProduct(productData);
-    if(error) {
+    if (error) {
         return res.status(400).send({
             error: error.details[0].message
         });
@@ -37,7 +46,7 @@ router.post('/new', async (req, res) =>{
         sku: productData.sku
     });
 
-    if(productExists) {
+    if (productExists) {
         return res.status(401).send({
             error: "El producto con el SKU: " + productData.sku + " ya existe."
         });
@@ -59,14 +68,14 @@ router.post('/new', async (req, res) =>{
 
 });
 
-function ToRegex( texto ) {
+function ToRegex(texto) {
 
     var textoRegex = "";
 
     //Suponiendo que el texto es "aspirador auto"
     for (var i = 0; i < texto.length; i++) {
         const caracter = texto.charAt(i);
-        if(caracter === ' ') {
+        if (caracter === ' ') {
             textoRegex += ".*";
         } else {
             textoRegex += '[' + caracter.toUpperCase() + caracter.toLowerCase() + ']';
@@ -77,7 +86,7 @@ function ToRegex( texto ) {
 }
 
 //Endpoint para buscar productos
-router.get('/search', async (req, res) =>{
+router.get('/search', async (req, res) => {
     var query = req.query;
     var name = query.name; //?name=aspiradora
     var price = query.price; //?price=0,100
@@ -85,18 +94,20 @@ router.get('/search', async (req, res) =>{
 
     var filtro = {};
 
-    if(name) {
-        filtro.name = { $regex: ToRegex(name) };
+    if (name) {
+        filtro.name = {
+            $regex: ToRegex(name)
+        };
     }
 
-    if(price) {
+    if (price) {
         var precios = price.split(',');
         //0,1 - 0 - 0,1,2
         //["0", "1"]
         //[]
         //["0", "1,2"]
         //0,a -> ["0", "a"]
-        if(precios.length >= 2) {
+        if (precios.length >= 2) {
             var min = parseInt(precios[0]);
             var max = parseInt(precios[1]);
 
@@ -104,20 +115,25 @@ router.get('/search', async (req, res) =>{
             max = isNaN(max) ? 10000 : max;
             //0,50
             //50,0
-            if(min > max) {
+            if (min > max) {
                 //Swap Value
                 var tempMax = max;
                 max = min;
                 min = tempMax;
             }
-            filtro.price = { $gte: min, $lte: max }
+            filtro.price = {
+                $gte: min,
+                $lte: max
+            }
         }
     }
 
-    if(stock) {
-        if(stock === "true") {
-            filtro.stock = { $gte: 1 };
-        } else if(stock === "false"){
+    if (stock) {
+        if (stock === "true") {
+            filtro.stock = {
+                $gte: 1
+            };
+        } else if (stock === "false") {
             filtro.stock = 0;
         }
     }
@@ -132,17 +148,19 @@ router.get('/search', async (req, res) =>{
 });
 
 //Endpoint para ver un producto en específico
-router.get('/:sku', async (req, res) =>{
+router.get('/:sku', async (req, res) => {
     var sku = req.params.sku;
 
-    var producto = await Product.findOne({ sku: sku }, {
+    var producto = await Product.findOne({
+        sku: sku
+    }, {
         _id: 0,
         __v: 0
     });
 
-    if(!producto) {
+    if (!producto) {
         return res.status(404).send({
-            message: "El producto identificado por el SKU: " + sku + " no existe" 
+            message: "El producto identificado por el SKU: " + sku + " no existe"
         });
     }
 
@@ -150,36 +168,54 @@ router.get('/:sku', async (req, res) =>{
 });
 
 //Endpoint para borrar un producto en específico
-router.delete('/:sku', async (req, res) =>{
+router.delete('/:sku', async (req, res) => {
+
+    var userIsAdmin = await Utils.isAdmin(req, res);
+    if(!userIsAdmin) {
+        return;
+    }
+
     var sku = req.params.sku;
 
-    var productExists = await Product.findOne({ sku: sku }, {
+    var productExists = await Product.findOne({
+        sku: sku
+    }, {
         _id: 0,
         __v: 0
     });
 
-    if(!productExists) {
+    if (!productExists) {
         return res.status(404).send({
-            message: "El producto identificado por el SKU: " + sku + " no existe" 
+            message: "El producto identificado por el SKU: " + sku + " no existe"
         });
     }
 
-    await Product.deleteOne({sku: sku});
+    await Product.deleteOne({
+        sku: sku
+    });
     res.send({
         message: "Se ha borrado el producto: " + sku
     });
 });
 
 //Endpoint para actualizar un producto en específico
-router.put('/:sku', async (req, res) =>{
+router.put('/:sku', async (req, res) => {
+
+    var userIsAdmin = await Utils.isAdmin(req, res);
+    if(!userIsAdmin) {
+        return;
+    }
+    
     var sku = req.params.sku;
     var productData = req.body;
 
-    var producto = await Product.findOne({sku: sku});
+    var producto = await Product.findOne({
+        sku: sku
+    });
 
-    if(!producto) {
+    if (!producto) {
         return res.status(404).send({
-            message: "El producto identificado por el SKU " + sku + " no existe" 
+            message: "El producto identificado por el SKU " + sku + " no existe"
         });
     }
 
@@ -188,24 +224,24 @@ router.put('/:sku', async (req, res) =>{
     for (var i = 0; i < propiedades.length; i++) {
         const propiedad = propiedades[i];
 
-        switch(propiedad) {
-            case "name": 
+        switch (propiedad) {
+            case "name":
                 producto.name = productData.name;
                 break;
-            
-            case "description": 
+
+            case "description":
                 producto.description = productData.description;
                 break;
 
-            case "stock": 
+            case "stock":
                 producto.stock = productData.stock;
                 break;
 
-            case "price": 
+            case "price":
                 producto.price = productData.price;
                 break;
 
-            case "images": 
+            case "images":
                 producto.images = productData.images;
                 break;
         }

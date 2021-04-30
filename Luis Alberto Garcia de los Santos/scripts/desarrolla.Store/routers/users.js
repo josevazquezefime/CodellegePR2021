@@ -7,24 +7,18 @@ const router = express.Router();
 //Importar nuestro modelo de datos
 const User = require('../models/user');
 
-//Importar el modulo de validate
+//Importar el módulo de validate
 const Validate = require('../validation/validate');
 
-//Importar el modulo de utilidades
+//Importar el módulo de utilities
 const Utils = require('../utils/utils');
+
 
 router.get('/all', async (req, res) => {
 
-    var userIsAdmin = Utils.isAdmin(req, res);
-    if(!userIsAdmin){
-        var usuarioActual = req.cookies["SESSIONID"];
-        if(usuarioActual !== nickname) {
-            res.status(403).send({
-                message: "Este usuario no puede ver esta informacion"
-            })
-            return;
-        }
-        
+    var userIsAdmin = await Utils.isAdmin(req, res);
+    if(!userIsAdmin) {
+        return;
     }
 
     var users = await User.find({}, {
@@ -63,9 +57,11 @@ router.post('/register', async (req, res) => {
     //O sea, aquí vienen los datos
     var datosUsuario = req.body;
 
-    //validamos que la infomracion necesaria se haya provisto de manera correcta
-    const { error } = Validate.registration(datosUsuario);
-    if(error) {
+    //Validamos que la información necesaria se haya provisto de manera correcta
+    const {
+        error
+    } = Validate.registration(datosUsuario);
+    if (error) {
         return res.status(400).send({
             error: error.details[0].message
         });
@@ -100,16 +96,20 @@ router.post('/register', async (req, res) => {
 });
 
 router.put('/:nickname', async (req, res) => {
-
-    var userIsAdmin = await Utils.isAdmin(req. res);
-    if(!userIsAdmin){
-        return;
-    }
-
     const nickname = req.params.nickname;
+    const usuarioActual = req.cookies["SESSIONID"];
     const userData = req.body;
 
-    var user = await User.findOne({ nickname: nickname });
+    if(nickname !== usuarioActual) {
+        var userIsAdmin = await Utils.isAdmin(req, res);
+        if(!userIsAdmin) {
+            return;
+        }
+    }
+
+    var user = await User.findOne({
+        nickname: nickname
+    });
 
     //findOne puede regresar null o el usuario
     if (!user) {
@@ -132,7 +132,7 @@ router.put('/:nickname', async (req, res) => {
     for (var i = 0; i < propiedades.length; i++) {
         const propiedad = propiedades[i];
 
-        switch(propiedad) {
+        switch (propiedad) {
             case "name":
                 user.name = userData.name
                 break;
@@ -148,7 +148,7 @@ router.put('/:nickname', async (req, res) => {
             case "password":
                 user.password = userData.password
                 break;
-            
+
             case "address":
                 user.address = userData.address
                 break;
@@ -165,8 +165,8 @@ router.put('/:nickname', async (req, res) => {
 
 router.delete('/:nickname', async (req, res) => {
 
-    var userIsAdmin = Utils.isAdmin(req, res);
-    if(!userIsAdmin){
+    var userIsAdmin = await Utils.isAdmin(req, res);
+    if(!userIsAdmin) {
         return;
     }
 
@@ -184,12 +184,14 @@ router.delete('/:nickname', async (req, res) => {
 });
 
 //Sesiones
-//Regularmente se mantienen a traves de algo llamado Cookie
+//Regularmente se mantienen a través de algo llamado Cookie
 router.post('/login', async (req, res) => {
     var datosLogin = req.body;
 
-    const { error } = Validate.login(datosLogin);
-    if(error) {
+    const {
+        error
+    } = Validate.login(datosLogin);
+    if (error) {
         return res.status(400).send({
             error: error.details[0].message
         });
@@ -212,26 +214,28 @@ router.post('/login', async (req, res) => {
 
     if(!usuario) {
         return res.status(404).send({
-            error: "Datos incorrectos de inicio de sesion. Verifique el user/password"
+            error: "Datos incorrectos de inicio de sesión. Verifique el user/password"
         });
     }
 
+    //Crea la cookie SESSIONID
     res.cookie('SESSIONID', usuario.nickname);
     res.send({
-        message: "Se ha iniciado sesion correctamente"
+        message: "Se ha iniciado sesión correctamente"
     });
 
 });
 
 //Logout
 router.post('/logout', async (req, res) => {
+    //Borra la cookie SESSIONID
     res.clearCookie('SESSIONID');
 
     res.send({
-        message: "Se ha desloggeado y se ha borrado la sesion"
+        message: "Se ha desloggeado y se ha borrado la sesión"
     });
 });
 
 //Exportar o generar el módulo users.js
-//Para ello debemos exportar aquello que contenga a todo la información
+//Para ello debemos exportar aquello que contenga a toda la información
 module.exports = router;

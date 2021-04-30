@@ -21,20 +21,18 @@ module.exports = {
             description: Joi.string().required(),
             stock: Joi.number().required(),
             price: Joi.number().required()
-        });  
+        });
 
         return schema.validate(data);
     },
+    //Validar el Login
+    login: function(data) {
+        const schema = Joi.object({
+            nickname: Joi.string().optional(),
+            email: Joi.string().optional(),
+            password: Joi.string().required(),
+        });
 
-//Validar el Login
-login: function(data) {
-    const schema = Joi.object({
-        nickname: Joi.string().optional(),
-        email: Joi.string().optional(),
-        password: Joi.string().optional(),
-    });
-
-    return schema.validate(data);
-}
+        return schema.validate(data);
+    }
 };
-
