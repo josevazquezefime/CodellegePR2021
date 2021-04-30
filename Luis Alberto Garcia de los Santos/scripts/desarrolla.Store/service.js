@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const PORT = 666;
 
 const uri = "mongodb+srv://gasl:asdfghjklñ@cluster0.yfmf7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
@@ -23,11 +24,17 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+app.use(cookieParser());
 
 var routerUsers = require('./routers/users');
 app.use('/users', routerUsers);
+//localhost:666/users/...
 
 var routerProducts = require('./routers/products');
 app.use('/products', routerProducts);
+//localhost:666/products/...
+
+var routerCarts = require('./routers/carts');
+app.use('/carts', routerCarts);
 
 app.listen(PORT);

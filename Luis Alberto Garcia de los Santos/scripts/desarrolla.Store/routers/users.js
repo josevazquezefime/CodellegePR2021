@@ -7,7 +7,20 @@ const router = express.Router();
 //Importar nuestro modelo de datos
 const User = require('../models/user');
 
+//Importar el módulo de validate
+const Validate = require('../validation/validate');
+
+//Importar el módulo de utilities
+const Utils = require('../utils/utils');
+
+
 router.get('/all', async (req, res) => {
+
+    var userIsAdmin = await Utils.isAdmin(req, res);
+    if(!userIsAdmin) {
+        return;
+    }
+
     var users = await User.find({}, {
         __v: 0,
         _id: 0
@@ -44,6 +57,16 @@ router.post('/register', async (req, res) => {
     //O sea, aquí vienen los datos
     var datosUsuario = req.body;
 
+    //Validamos que la información necesaria se haya provisto de manera correcta
+    const {
+        error
+    } = Validate.registration(datosUsuario);
+    if (error) {
+        return res.status(400).send({
+            error: error.details[0].message
+        });
+    }
+
     //OR en el query de Mongo
     var userExists = await User.findOne({
         $or: [{
@@ -74,9 +97,19 @@ router.post('/register', async (req, res) => {
 
 router.put('/:nickname', async (req, res) => {
     const nickname = req.params.nickname;
+    const usuarioActual = req.cookies["SESSIONID"];
     const userData = req.body;
 
-    var user = await User.findOne({ nickname: nickname });
+    if(nickname !== usuarioActual) {
+        var userIsAdmin = await Utils.isAdmin(req, res);
+        if(!userIsAdmin) {
+            return;
+        }
+    }
+
+    var user = await User.findOne({
+        nickname: nickname
+    });
 
     //findOne puede regresar null o el usuario
     if (!user) {
@@ -99,7 +132,7 @@ router.put('/:nickname', async (req, res) => {
     for (var i = 0; i < propiedades.length; i++) {
         const propiedad = propiedades[i];
 
-        switch(propiedad) {
+        switch (propiedad) {
             case "name":
                 user.name = userData.name
                 break;
@@ -115,7 +148,7 @@ router.put('/:nickname', async (req, res) => {
             case "password":
                 user.password = userData.password
                 break;
-            
+
             case "address":
                 user.address = userData.address
                 break;
@@ -132,6 +165,11 @@ router.put('/:nickname', async (req, res) => {
 
 router.delete('/:nickname', async (req, res) => {
 
+    var userIsAdmin = await Utils.isAdmin(req, res);
+    if(!userIsAdmin) {
+        return;
+    }
+
     var parametros = req.params;
     var nickname = parametros.nickname;
 
@@ -145,6 +183,59 @@ router.delete('/:nickname', async (req, res) => {
 
 });
 
+//Sesiones
+//Regularmente se mantienen a través de algo llamado Cookie
+router.post('/login', async (req, res) => {
+    var datosLogin = req.body;
+
+    const {
+        error
+    } = Validate.login(datosLogin);
+    if (error) {
+        return res.status(400).send({
+            error: error.details[0].message
+        });
+    }
+
+    if (!datosLogin.nickname && !datosLogin.email) {
+        return res.status(403).send({
+            error: "Necesita especificar un nickname o correo para iniciar sesión"
+        });
+    }
+
+    var usuario = await User.findOne({
+        $or: [{
+            nickname: datosLogin.nickname
+        }, {
+            email: datosLogin.email
+        }],
+        password: datosLogin.password
+    });
+
+    if(!usuario) {
+        return res.status(404).send({
+            error: "Datos incorrectos de inicio de sesión. Verifique el user/password"
+        });
+    }
+
+    //Crea la cookie SESSIONID
+    res.cookie('SESSIONID', usuario.nickname);
+    res.send({
+        message: "Se ha iniciado sesión correctamente"
+    });
+
+});
+
+//Logout
+router.post('/logout', async (req, res) => {
+    //Borra la cookie SESSIONID
+    res.clearCookie('SESSIONID');
+
+    res.send({
+        message: "Se ha desloggeado y se ha borrado la sesión"
+    });
+});
+
 //Exportar o generar el módulo users.js
-//Para ello debemos exportar aquello que contenga a todo la información
+//Para ello debemos exportar aquello que contenga a toda la información
 module.exports = router;
