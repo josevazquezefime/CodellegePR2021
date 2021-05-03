@@ -26,6 +26,9 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cookieParser());
 
+//Crear un servidor WEB
+app.use(express.static('./public'));
+
 var routerUsers = require('./routers/users');
 app.use('/users', routerUsers);
 //localhost:666/users/...
