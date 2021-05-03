@@ -9,3 +9,5 @@ const schema = new mongoose.Schema({
 
 var model = mongoose.model(modelName, schema, collection);
 module.exports = model;
+
+//localhost:888/users/portafolio/User123?reqID=talID
