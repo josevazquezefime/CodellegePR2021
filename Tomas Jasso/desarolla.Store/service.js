@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const PORT = 666;
 
-const uri = "mongodb+srv://kmcf:spgg2021@cluster0.lh9dp.mongodb.net/SPGG?retryWrites=true&w=majority";
+const uri = "mongodb+srv://jasso65:jassormz.65@cluster0.rllc7.mongodb.net/SPGG?retryWrites=true&w=majority";
 mongoose.connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -25,6 +25,9 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(cookieParser());
+
+//Crear un servidor WEB
+app.use(express.static('./public'));
 
 var routerUsers = require('./routers/users');
 app.use('/users', routerUsers);
