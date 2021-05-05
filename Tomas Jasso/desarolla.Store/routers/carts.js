@@ -223,6 +223,81 @@ router.patch('/add', async (req, res) =>{
 
 
 //Endpoint para eliminar un producto del carrito -> Actualizar
+/**
+ * Para eliminar un producto, necesitamos mandar el ID del producto (sku)
+ * Se busca ese producto en el carrito
+ * Se debe mandar también el qty a eliminar, o una variable "all" que sea true o false
+ * {
+ *    sku: 1234,
+ *    qty: 3,
+ *    all: true -> tiene prioridad si se mandan los 2
+ * }
+ * Se debe actualizar el carrito, en su parte del quantity y del total...
+ * Debemos iterar el arreglo de productos dentro del carrito: Si se elimina por completo, sumar el unit_price de cada uno
+ * Al final restarlo al total
+ * Restar al quantity el producto.qty a eliminar
+ */
+ router.patch('/remove', async (req, res) => {
+    var datoProducto = req.body;
+    var cartID = req.cookies["CARTID"];
+    var carrito = null;
+
+    //Si no viene el sku y no viene o el qty o el all, significa que falta 1 propiedad
+    if (!datoProducto.sku && (!datoProducto.qty || !datoProducto.all)) {
+        return res.status(400).send({
+            message: "Debe especificar el sku del producto, qty a eliminar, o all: true"
+        })
+    }
+
+    if(datoProducto.qty) {
+        datoProducto.qty = parseInt(datoProducto.qty);
+        if(isNaN(datoProducto.qty) || datoProducto.qty < 1) {
+            return res.status(400).send({
+                message: "producto.qty debe ser un número entero mayor o igual a 1"
+            });
+        }
+    }
+
+    carrito = await Cart.findOne({
+        id: cartID
+    });
+
+    if (!carrito) {
+        return res.status(400).send({
+            message: "No existe un carrito asociado a esta petición... Ejecute el endpoint /carts/getCart"
+        });
+    }
+
+    var productoExiste = carrito.products.some(prod => prod.sku === datoProducto.sku);
+    if (productoExiste) {
+        const i = carrito.products.findIndex(prod => prod.sku === datoProducto.sku);
+        const producto = carrito.products[i];
+
+        if(datoProducto.all === true || producto.qty <= datoProducto.qty) {
+            //Eliminar por completo el producto del carrito
+            carrito.quantity -= producto.qty;
+            carrito.total -= producto.unit_price * producto.qty;
+            carrito.products.splice(i, 1);
+        } else if(producto.qty > datoProducto.qty) {
+            producto.qty -= datoProducto.qty;
+            carrito.quantity -= datoProducto.qty;
+            carrito.total -= producto.unit_price * datoProducto.qty;
+        }
+    }
+
+    carrito.markModified('products');
+    await carrito.save();
+
+    var carritoFinal = carrito.toObject();
+    delete carritoFinal._id;
+    delete carritoFinal.__v;
+
+    res.send(carritoFinal);
+
+    /*var numeros = [1,2,3,4,5,6,7,8,9,10];
+    var existeCinco = numeros.includes(5);
+    var cincoExiste = numeros.some(num => num === 5);*/
+});
 
 
 //Exportar o generar el módulo carts.js
