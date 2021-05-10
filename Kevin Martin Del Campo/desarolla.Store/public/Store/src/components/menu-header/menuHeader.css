@@ -1,25 +1,27 @@
 header {
-    background: #00adb5;
-    box-shadow: 0rem 0.2rem 1rem 0.1rem #393e46;
+    background: var(--color-blue);
+    box-shadow: 0rem 0.2rem 1rem 0.1rem var(--color-gray);
     height: 3rem;
     padding: 0.3rem;
-    color: #EEEEEE;
+    color: var(--color-white);
     font-size: 1.4rem;
 
     position: sticky;
     left: 0;
     top: 0;
+
+    z-index: 1060;
 }
 
 a, a:link {
-    color: #EEEEEE;
+    color: var(--color-white);
     text-decoration: none;
 
     transition: 0.3s color;
 }
 
 a:hover {
-    color: #393e46;
+    color: var(--color-gray);
     text-decoration: none;
 
     transition: 0.3s color;
