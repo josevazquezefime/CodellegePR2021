@@ -6,7 +6,7 @@ import { Component } from "@angular/core";
     styleUrls: ['./menuHeader.css']
 })
 
-export class HeaderComponent{
+export class HeaderModule{
     accountRedirect = 'Login';
     numberProducts = 0;
 }

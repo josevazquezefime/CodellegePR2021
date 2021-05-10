@@ -9,3 +9,4 @@ if (environment.production) {
 }
 
 platformBrowserDynamic().bootstrapModule(HeaderModule).catch(err => console.error(err));
+platformBrowserDynamic().bootstrapModule(StoreModule).catch(err => console.error(err));
