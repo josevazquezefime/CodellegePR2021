@@ -2,6 +2,7 @@ import {
   Component,
   OnInit
 } from '@angular/core';
+import { Singleton } from '../../refactoring/DataSingleton';
 declare var $: any;
 
 @Component({
@@ -14,9 +15,15 @@ declare var $: any;
 //Ejemplo: Si se llama catalogo.component.ts, debemos exportar CatalogoComponent
 export class HeaderComponent implements OnInit {
   ngOnInit(): void {
+    this.ReloadCart();9000
+    var self = this;
+    Singleton.GetInstance().ReloadCart = function() { self.ReloadCart(); };
+  }
+
+  ReloadCart(){
 
     var self = this;
-
+    console.log('Ejecutando LoadCart...')
     $.ajax({
       type: "GET",
       xhrFields: { //Esto permite compartir cookies
@@ -30,6 +37,7 @@ export class HeaderComponent implements OnInit {
       }
     });
   }
+
   //Cambiar el nombre de AppComponent por el del nuestro
   accountRedirect = 'Login';
   numberProducts = 0;

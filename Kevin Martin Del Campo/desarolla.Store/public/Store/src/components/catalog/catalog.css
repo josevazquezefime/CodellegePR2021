@@ -33,3 +33,10 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.toast {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    background-color: var(--color-blue);
+}

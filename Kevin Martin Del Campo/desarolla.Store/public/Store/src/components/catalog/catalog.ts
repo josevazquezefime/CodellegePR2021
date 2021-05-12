@@ -2,6 +2,7 @@ import {
   Component,
   OnInit
 } from '@angular/core';
+import { Singleton } from '../../refactoring/DataSingleton';
 declare var $: any;
 
 @Component({
@@ -18,6 +19,7 @@ export class CatalogComponent implements OnInit {
     //console.log('El valor de productos es: ' + this.products);
     //Hacer mi petición a http://localhost:666/products/all
     this.GetProducts();
+    $(".toast").toast();
   }
 
   GetProducts() {
@@ -46,8 +48,10 @@ export class CatalogComponent implements OnInit {
         qty: 1
       },
       success: function (res: any) {
-        console.log('Add to cart: ');
-        console.log(res);
+        $(".toast").toast('show');
+        Singleton.GetInstance().ReloadCart();
+        //console.log('Add to cart: ');
+        //console.log(res);
       }
     });
   }

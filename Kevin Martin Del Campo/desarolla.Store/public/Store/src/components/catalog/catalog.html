@@ -9,7 +9,8 @@
       <div *ngFor="let product of products" class="card product-card">
         <div [id]="'slider-' + product.sku" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
-            <div *ngFor="let image of product.images; let i = index" [class]="'carousel-item' + (i === 0 ? ' active' : '')">
+            <div *ngFor="let image of product.images; let i = index"
+              [class]="'carousel-item' + (i === 0 ? ' active' : '')">
               <img [src]="image" class="d-block w-100">
             </div>
           </div>
@@ -29,10 +30,20 @@
           <p class="card-text">
             {{product.description}}
           </p>
-          <button (click)="AddToCart(product.sku)" 
-                  class="btn float-right">+</button>
+          <button (click)="AddToCart(product.sku)" class="btn float-right">+</button>
         </div>
       </div>
     </section>
   </article>
 </main>
+
+<div class="toast align-items-center text-white border-0" role="alert" aria-live="assertive"
+  aria-atomic="true" data-bs-animation="true" data-bs-autohide="true" data-bs-delay="2000">
+  <div class="d-flex">
+    <div class="toast-body">
+      Se ha añadido el producto al carrito
+    </div>
+    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+      aria-label="Close"></button>
+  </div>
+</div>
