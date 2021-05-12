@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 const PORT = 666;
 
 const uri = "mongodb+srv://kmcf:spgg2021@cluster0.lh9dp.mongodb.net/SPGG?retryWrites=true&w=majority";
@@ -25,6 +26,10 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(cookieParser());
+app.use(cors({
+    origin: 'http://localhost:4200',
+    credentials: true
+}));
 //Crear un servidor WEB
 app.use(express.static('./public'));
 

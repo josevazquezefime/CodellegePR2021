@@ -1,6 +1,8 @@
 import {
-  Component
+  Component,
+  OnInit
 } from '@angular/core';
+declare var $: any;
 
 @Component({
   selector: 'main-menu', //Asignar un nombre de etiqueta, único
@@ -10,7 +12,25 @@ import {
 
 //Debemos asignarle el nombre de nuestro componente.
 //Ejemplo: Si se llama catalogo.component.ts, debemos exportar CatalogoComponent
-export class HeaderComponent { //Cambiar el nombre de AppComponent por el del nuestro
+export class HeaderComponent implements OnInit {
+  ngOnInit(): void {
+
+    var self = this;
+
+    $.ajax({
+      type: "GET",
+      xhrFields: { //Esto permite compartir cookies
+        withCredentials: true
+      },
+      url: "http://localhost:666/carts/getCart",
+      success: function (cartInfo: any) {
+        self.numberProducts = cartInfo.quantity;
+        //console.log('Carrito: ')
+        //console.log(cartInfo);
+      }
+    });
+  }
+  //Cambiar el nombre de AppComponent por el del nuestro
   accountRedirect = 'Login';
   numberProducts = 0;
 }
