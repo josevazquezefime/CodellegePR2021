@@ -15,15 +15,15 @@ declare var $: any;
 //Ejemplo: Si se llama catalogo.component.ts, debemos exportar CatalogoComponent
 export class HeaderComponent implements OnInit {
   ngOnInit(): void {
-    this.ReloadCart();9000
+    this.ReloadCart();
     var self = this;
-    Singleton.GetInstance().ReloadCart = function() { self.ReloadCart(); };
+    Singleton.GetInstance().ReloadCart = function() { 
+      self.ReloadCart(); 
+    };
   }
 
   ReloadCart(){
-
     var self = this;
-    console.log('Ejecutando LoadCart...')
     $.ajax({
       type: "GET",
       xhrFields: { //Esto permite compartir cookies
