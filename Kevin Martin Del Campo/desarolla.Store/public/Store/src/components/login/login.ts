@@ -1,7 +1,7 @@
 import {
   Component
 } from '@angular/core';
-declare var $:any;
+declare var $: any;
 
 @Component({
   selector: 'login', //Asignar un nombre de etiqueta, único
@@ -12,35 +12,43 @@ declare var $:any;
 //Debemos asignarle el nombre de nuestro componente.
 //Ejemplo: Si se llama catalogo.component.ts, debemos exportar CatalogoComponent
 export class LoginComponent { //Cambiar el nombre de AppComponent por el del nuestro
-    Login(){
-        $.ajax({
-            type: "POST",
-            xhrFields: { //Esto permite compartir cookies
-              withCredentials: true
-            },
-            url: 'http://localhost:666/users/login',
-            data: {
-              email: this.email,
-              password: this.password
-            },
-            success: function (res: any) {
-              console.log('Hizo login, ver cookies');
-            },
-            error: function(error: any) {
-                console.log('No se inició sesión');
-                console.log(error);
-            }
-          });
-    }
+  Login() {
+    var self = this;
+    $.ajax({
+      type: "POST",
+      xhrFields: { //Esto permite compartir cookies
+        withCredentials: true
+      },
+      url: 'http://localhost:666/users/login',
+      data: {
+        email: this.email,
+        nickname: this.email,
+        password: this.password
+      },
+      success: function (res: any) {
+        self.invalidLogin = false;
+        window.location.href = "/";
+      },
+      error: function (error: any) {
+        self.invalidLogin = true;
+      }
+    });
+  }
 
-    UpdateEmail(event: any) {
-        this.email = event.target.value;
+  UpdateValue(event: any, property: String) {
+    //email
+    var value = event.target.value;
+    switch(property){
+      case "email":
+        this.email = value;
+        break;
+      case "password":
+        this.password = value;
+        break;
     }
+  }
 
-    UpdatePassword(event: any) {
-        this.password = event.target.value;
-    }
-
-    email = '';
-    password = '';
+  email = '';
+  password = '';
+  invalidLogin = false;
 }

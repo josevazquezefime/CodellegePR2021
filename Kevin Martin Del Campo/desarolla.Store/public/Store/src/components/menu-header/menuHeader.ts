@@ -20,6 +20,30 @@ export class HeaderComponent implements OnInit {
     Singleton.GetInstance().ReloadCart = function() { 
       self.ReloadCart(); 
     };
+
+    this.CheckSession();
+  }
+
+  CheckSession() {
+    var self = this;
+    $.ajax({
+      type: "GET",
+      xhrFields: { //Esto permite compartir cookies
+        withCredentials: true
+      },
+      url: "http://localhost:666/users/getSession",
+      success: function(result: any) {
+        if(result.session === true) {
+          if(window.location.pathname === '/register' || window.location.pathname === '/login') {
+            window.location.href = '/';
+          }
+          self.accountRedirect = "Mi Cuenta";
+        }
+      },
+      error: function() {
+        self.accountRedirect = "Login";
+      }
+    });
   }
 
   ReloadCart(){
