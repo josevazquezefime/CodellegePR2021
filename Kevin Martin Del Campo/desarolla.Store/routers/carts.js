@@ -15,6 +15,7 @@ const Product = require('../models/product');
 
 //Importar el módulo de utilities
 const Utils = require('../utils/utils');
+const { boolean } = require('joi');
 
 //Endpoint del tipo GET, que se llame getCart
 //Debe revisar si existe una cookie con el ID de un carrito (La cookie se llama CARTID)
@@ -253,6 +254,8 @@ router.patch('/remove', async (req, res) => {
     var datoProducto = req.body;
     var cartID = req.cookies["CARTID"];
     var carrito = null;
+
+    datoProducto.all = datoProducto.all === true || datoProducto.all === 'true';
 
     //Si no viene el sku y no viene o el qty o el all, significa que falta 1 propiedad
     if (!datoProducto.sku && (!datoProducto.qty || !datoProducto.all)) {
