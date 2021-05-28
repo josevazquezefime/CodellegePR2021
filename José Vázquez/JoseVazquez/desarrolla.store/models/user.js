@@ -1,17 +1,20 @@
 const mongoose = require('mongoose');
-module.exports = mongoose.model('User', new mongoose.Schema({
+
+//Generar nuestro propio módulo
+module.exports = mongoose.model( 'User', new mongoose.Schema({
     nickname: String,
     name: String,
     lastName: String,
-    adress: {
+    address: {
         street: String,
         suburb: String,
-        cityi: String,
+        city: String,
         state: String,
         zip: Number
     },
     email: String,
     password: String,
     phone: Number,
-    userType: String
-}), 'Users');
+    userType: String,
+    cartID: String
+}), 'Users' );
