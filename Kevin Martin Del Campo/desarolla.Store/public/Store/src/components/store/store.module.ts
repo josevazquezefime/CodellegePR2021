@@ -11,6 +11,8 @@ import { RegisterComponent } from '../register/register';
 import { AccountComponent } from '../account/account';
 import { CartComponent } from '../cart/cart';
 
+import { LoaderComponent } from '../loader/loader';
+
 const routes: Routes = [
   { path: 'catalog', component: CatalogComponent },
   { path: '', component: InicioComponent },
@@ -28,7 +30,8 @@ const routes: Routes = [
     HeaderComponent,
     CatalogComponent,
     FooterComponent,
-    CartComponent
+    CartComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,

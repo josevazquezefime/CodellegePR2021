@@ -63,3 +63,30 @@ td {
   background-color: var(--color-gray);
   color: var(--color-white);
 }
+
+.pay-button {
+  padding: 0.5rem 2rem;
+  background: var(--color-blue);
+  border: 0;
+  border-radius: 0;
+  color: var(--color-white);
+  width: 100%;
+}
+
+.pay-button:hover {
+  background: var(--color-gray);
+  color: var(--color-white);
+}
+
+.clean-button {
+  margin-left: 1rem;
+  background: var(--color-blue);
+  border: 0;
+  border-radius: 0;
+  color: var(--color-white);
+}
+
+.clean-button:hover {
+  background: var(--color-gray);
+  color: var(--color-white);
+}

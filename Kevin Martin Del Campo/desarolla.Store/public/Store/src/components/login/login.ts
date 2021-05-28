@@ -1,6 +1,7 @@
 import {
   Component
 } from '@angular/core';
+import { Singleton } from '../../refactoring/DataSingleton';
 declare var $: any;
 
 @Component({
@@ -14,6 +15,7 @@ declare var $: any;
 export class LoginComponent { //Cambiar el nombre de AppComponent por el del nuestro
   Login() {
     var self = this;
+    Singleton.GetInstance().ShowLoader();
     $.ajax({
       type: "POST",
       xhrFields: { //Esto permite compartir cookies
@@ -26,10 +28,12 @@ export class LoginComponent { //Cambiar el nombre de AppComponent por el del nue
         password: this.password
       },
       success: function (res: any) {
+        Singleton.GetInstance().HideLoader();
         self.invalidLogin = false;
         window.location.href = "/";
       },
       error: function (error: any) {
+        Singleton.GetInstance().HideLoader();
         self.invalidLogin = true;
       }
     });

@@ -2,7 +2,9 @@ import {
   Component,
   OnInit
 } from '@angular/core';
-import { Singleton } from '../../refactoring/DataSingleton';
+import {
+  Singleton
+} from '../../refactoring/DataSingleton';
 declare var $: any;
 
 @Component({
@@ -21,6 +23,7 @@ export class CartComponent implements OnInit {
   GetCart() {
     Singleton.GetInstance().ReloadCart();
     var self = this;
+    Singleton.GetInstance().ShowLoader();
     $.ajax({
       type: "GET",
       xhrFields: {
@@ -34,12 +37,14 @@ export class CartComponent implements OnInit {
           self.products = null;
         }
         self.total = cartInfo.total;
+        Singleton.GetInstance().HideLoader();
       }
     });
   }
 
   AddOne(sku: any) {
     var self = this;
+    Singleton.GetInstance().ShowLoader();
     $.ajax({
       type: "patch",
       xhrFields: {
@@ -58,6 +63,7 @@ export class CartComponent implements OnInit {
 
   DeleteOne(sku: any) {
     var self = this;
+    Singleton.GetInstance().ShowLoader();
     $.ajax({
       type: "patch",
       xhrFields: {
@@ -76,6 +82,7 @@ export class CartComponent implements OnInit {
 
   DeleteProduct(sku: any) {
     var self = this;
+    Singleton.GetInstance().ShowLoader();
     $.ajax({
       type: "patch",
       xhrFields: {
@@ -87,6 +94,21 @@ export class CartComponent implements OnInit {
       },
       url: "http://localhost:666/carts/remove",
       success: function (response: any) {
+        self.GetCart();
+      }
+    });
+  }
+
+  CleanCart() {
+    var self = this;
+    Singleton.GetInstance().ShowLoader();
+    $.ajax({
+      type: "PATCH",
+      xhrFields: {
+        withCredentials: true
+      },
+      url: 'http://localhost:666/carts/cleanCart',
+      success: function (cartInfo: any) {
         self.GetCart();
       }
     });

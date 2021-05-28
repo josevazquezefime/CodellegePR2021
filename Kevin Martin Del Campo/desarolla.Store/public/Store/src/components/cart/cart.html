@@ -1,6 +1,10 @@
 <section class="container py-5">
   <div class="row title">
-    <h2>Carrito de compras</h2>
+    <h2>Carrito de compras
+      <button class="btn clean-button" (click)="CleanCart()">
+        <i class="bi bi-trash-fill"></i>&nbsp;Limpiar carrito
+      </button>
+    </h2>
     <div class="col-6 line-border"></div>
   </div>
   <div class="row">
@@ -45,8 +49,11 @@
           </tr>
         </tbody>
       </table>
-      <section>
+      <section class="overflow-hidden">
           <span class="cart-total">Total: ${{total}}</span>
+      </section>
+      <section>
+        <button class="btn pay-button">Pagar</button>
       </section>
     </div>
     <ng-template #emptyCart>

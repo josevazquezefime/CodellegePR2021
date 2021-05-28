@@ -28,6 +28,15 @@ export class AccountComponent implements OnInit { //Cambiar el nombre de AppComp
       url: "http://localhost:666/users/profile",
       success: function (datosUsuario: any) {
         self.userData = datosUsuario;
+        if(!self.userData.address) {
+          self.userData.address = {
+            street: '',
+            suburb: '',
+            city: '',
+            state: '',
+            zip: '',
+          }
+        }
       }
     });
   }

@@ -15,7 +15,9 @@ const Product = require('../models/product');
 
 //Importar el módulo de utilities
 const Utils = require('../utils/utils');
-const { boolean } = require('joi');
+const {
+    boolean
+} = require('joi');
 
 //Endpoint del tipo GET, que se llame getCart
 //Debe revisar si existe una cookie con el ID de un carrito (La cookie se llama CARTID)
@@ -264,9 +266,9 @@ router.patch('/remove', async (req, res) => {
         })
     }
 
-    if(datoProducto.qty) {
+    if (datoProducto.qty) {
         datoProducto.qty = parseInt(datoProducto.qty);
-        if(isNaN(datoProducto.qty) || datoProducto.qty < 1) {
+        if (isNaN(datoProducto.qty) || datoProducto.qty < 1) {
             return res.status(400).send({
                 message: "producto.qty debe ser un número entero mayor o igual a 1"
             });
@@ -288,12 +290,12 @@ router.patch('/remove', async (req, res) => {
         const i = carrito.products.findIndex(prod => prod.sku === datoProducto.sku);
         const producto = carrito.products[i];
 
-        if(datoProducto.all === true || producto.qty <= datoProducto.qty) {
+        if (datoProducto.all === true || producto.qty <= datoProducto.qty) {
             //Eliminar por completo el producto del carrito
             carrito.quantity -= producto.qty;
             carrito.total -= producto.unit_price * producto.qty;
             carrito.products.splice(i, 1);
-        } else if(producto.qty > datoProducto.qty) {
+        } else if (producto.qty > datoProducto.qty) {
             producto.qty -= datoProducto.qty;
             carrito.quantity -= datoProducto.qty;
             carrito.total -= producto.unit_price * datoProducto.qty;
@@ -312,6 +314,28 @@ router.patch('/remove', async (req, res) => {
     /*var numeros = [1,2,3,4,5,6,7,8,9,10];
     var existeCinco = numeros.includes(5);
     var cincoExiste = numeros.some(num => num === 5);*/
+});
+
+router.patch('/cleanCart', async (req, res) => {
+    var cartID = req.cookies["CARTID"];
+    var carrito = await Cart.findOne({
+        id: cartID
+    });
+
+    if (!carrito) {
+        return res.status(400).send({
+            message: "No existe un carrito asociado a esta petición... Ejecute el endpoint /carts/getCart"
+        });
+    }
+
+    carrito.products = [];
+    carrito.quantity = 0;
+    carrito.total = 0;
+
+    carrito.markModified('products');
+    await carrito.save();
+
+    res.send(carrito);
 });
 
 

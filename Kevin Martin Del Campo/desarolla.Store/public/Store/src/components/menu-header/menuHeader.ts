@@ -48,6 +48,7 @@ export class HeaderComponent implements OnInit {
 
   ReloadCart(){
     var self = this;
+    Singleton.GetInstance().ShowLoader();
     $.ajax({
       type: "GET",
       xhrFields: { //Esto permite compartir cookies
@@ -56,8 +57,7 @@ export class HeaderComponent implements OnInit {
       url: "http://localhost:666/carts/getCart",
       success: function (cartInfo: any) {
         self.numberProducts = cartInfo.quantity;
-        //console.log('Carrito: ')
-        //console.log(cartInfo);
+        Singleton.GetInstance().HideLoader();
       }
     });
   }
