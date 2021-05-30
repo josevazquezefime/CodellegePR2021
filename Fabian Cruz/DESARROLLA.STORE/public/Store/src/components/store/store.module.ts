@@ -11,12 +11,14 @@ import { CardsComponent } from '../cards/cards';
 import { InicioComponent } from '../inicio/inicio';
 import { LoginComponent } from '../login/login';
 import { RegisterComponent } from '../register/register';
+import { CartComponent } from '../cart/cart';
 
 const routes: Routes = [
   { path: 'catalog', component: CardsComponent},
   { path: '', component: InicioComponent},
   { path: 'login', component: LoginComponent},
-  { path: 'register', component: RegisterComponent}
+  { path: 'register', component: RegisterComponent},
+  { path: 'cart', component: CartComponent}
 ];
 
 @NgModule({
@@ -27,7 +29,8 @@ const routes: Routes = [
     CardsComponent,
     InicioComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
