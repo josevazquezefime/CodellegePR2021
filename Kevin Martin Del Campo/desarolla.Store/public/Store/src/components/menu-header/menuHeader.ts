@@ -56,6 +56,11 @@ export class HeaderComponent implements OnInit {
       },
       url: "http://localhost:666/carts/getCart",
       success: function (cartInfo: any) {
+        if(Singleton.GetInstance().UpdateCheckout) {
+          var copia = Object.assign({},cartInfo);
+          Singleton.GetInstance().UpdateCheckout(copia);
+        }
+        
         self.numberProducts = cartInfo.quantity;
         Singleton.GetInstance().HideLoader();
       }
